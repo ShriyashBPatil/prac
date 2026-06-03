@@ -1,0 +1,3117 @@
+1.1.: Write a Java program using Statement to insert a student record into the student table.
+
+Code:
+package com.exp;
+import java.sql.*;
+public class InsertStudent {
+    public static void main(String[] args) {
+        try {
+            Connection con = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/lab", "root", "Shriyash@11");
+
+            Statement stmt = con.createStatement();
+
+            String query = "INSERT INTO student VALUES (108, 'Neha', 'MCA', 85)";
+            stmt.executeUpdate(query);
+
+            System.out.println("Record Inserted Successfully");
+
+            con.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+}
+
+
+1.2.Write a program using Statement to retrieve a student record based on ID.
+
+
+package com.exp;
+import java.sql.*;
+import java.util.Scanner;
+
+public class GetStudentById {
+    public static void main(String[] args) {
+        try {
+            Connection con = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/lab", "root", "Shriyash@11");
+
+            Statement stmt = con.createStatement();
+            System.out.print("Enter Student ID:");
+            Scanner sc = new Scanner(System.in);
+        
+            int id = sc.nextInt();
+            String query = "SELECT * FROM student WHERE id = " + id;
+
+            ResultSet rs = stmt.executeQuery(query);
+
+            if (rs.next()) {
+                System.out.println("ID: " + rs.getInt("id"));
+                System.out.println("Name: " + rs.getString("name"));
+                System.out.println("Course: " + rs.getString("course"));
+                System.out.println("Marks: " + rs.getInt("marks"));
+            } else {
+                System.out.println("Record not found");
+            }
+
+            con.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+}
+
+
+
+
+1.3.Write a program to display all records from the student table
+
+package com.exp;
+import java.sql.*;
+
+public class DisplayAllStudents {
+    public static void main(String[] args) {
+        try {
+            Connection con = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/lab", "root", "Shriyash@11");
+
+            Statement stmt = con.createStatement();
+
+            String query = "SELECT * FROM student";
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                System.out.println(
+                    rs.getInt("id") + " | " +
+                    rs.getString("name") + " | " +
+                    rs.getString("course") + " | " +
+                    rs.getInt("marks")
+                );
+            }
+
+            con.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+}
+
+
+
+1.4.Write a Java program using Statement to update marks of a student.
+
+package com.exp;
+
+import java.sql.*;
+
+public class UpdateStudent {
+    public static void main(String[] args) {
+        try {
+            Connection con = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/lab", "root", "Shriyash@11");
+
+            Statement stmt = con.createStatement();
+
+            int id = 199;
+            int newMarks = 95;
+
+            String query = "UPDATE student SET marks = " + newMarks + " WHERE id = " + id;
+
+            int rows = stmt.executeUpdate(query);
+
+            if (rows > 0) {
+                System.out.println("Record Updated Successfully");
+            } else {
+                System.out.println("Record Not Found");
+            }
+
+            con.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+}
+
+
+
+1.5.Write a Java program using Statement to delete a record.
+
+package com.exp;
+
+import java.sql.*;
+
+public class DeleteStudent {
+    public static void main(String[] args) {
+        try {
+            Connection con = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/lab", "root", "Shriyash@11");
+
+            Statement stmt = con.createStatement();
+
+            int id = 199;
+            String query = "DELETE FROM student WHERE id = " + id;
+
+            int rows = stmt.executeUpdate(query);
+
+            if (rows > 0) {
+                System.out.println("Record Deleted Successfully");
+            } else {
+                System.out.println("Record Not Found");
+            }
+
+            con.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+}
+
+
+1.6 Write a menu-driven Java program using Statement to perform all CRUD operations.
+
+import java.sql.*;
+import java.util.Scanner;
+
+public class StudentCRUD {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+            Connection con = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/college",
+                    "root",
+                    "Mysql@1234"
+            );
+
+            Statement stmt = con.createStatement();
+
+            int choice;
+
+            do {
+                System.out.println("\n---- MENU ----");
+                System.out.println("1. Insert");
+                System.out.println("2. Search");
+                System.out.println("3. Display All");
+                System.out.println("4. Update");
+                System.out.println("5. Delete");
+                System.out.println("6. Exit");
+
+                choice = sc.nextInt();
+
+                switch(choice) {
+
+                    case 1:
+                        System.out.println("Enter id, name, course, marks:");
+                        int id = sc.nextInt();
+                        String name = sc.next();
+                        String course = sc.next();
+                        int marks = sc.nextInt();
+
+                        stmt.executeUpdate(
+                            "INSERT INTO student VALUES(" +
+                            id + ",'" + name + "','" +
+                            course + "'," + marks + ")"
+                        );
+                        System.out.println("Record Inserted");
+                        break;
+
+                    case 2:
+                        System.out.println("Enter id:");
+                        int sid = sc.nextInt();
+
+                        ResultSet rs = stmt.executeQuery(
+                            "SELECT * FROM student WHERE id=" + sid
+                        );
+
+                        if(rs.next()) {
+                            System.out.println(
+                                rs.getInt("id") + " " +
+                                rs.getString("name") + " " +
+                                rs.getString("course") + " " +
+                                rs.getInt("marks")
+                            );
+                        } else {
+                            System.out.println("Record Not Found");
+                        }
+                        break;
+
+                    case 3:
+                        ResultSet rs2 = stmt.executeQuery(
+                            "SELECT * FROM student"
+                        );
+
+                        while(rs2.next()) {
+                            System.out.println(
+                                rs2.getInt("id") + " " +
+                                rs2.getString("name") + " " +
+                                rs2.getString("course") + " " +
+                                rs2.getInt("marks")
+                            );
+                        }
+                        break;
+
+                    case 4:
+                        System.out.println("Enter id and new marks:");
+                        int uid = sc.nextInt();
+                        int newMarks = sc.nextInt();
+
+                        int rows = stmt.executeUpdate(
+                            "UPDATE student SET marks=" +
+                            newMarks + " WHERE id=" + uid
+                        );
+
+                        System.out.println(rows + " record updated");
+                        break;
+
+                    case 5:
+                        System.out.println("Enter id:");
+                        int did = sc.nextInt();
+
+                        int del = stmt.executeUpdate(
+                            "DELETE FROM student WHERE id=" + did
+                        );
+
+                        System.out.println(del + " record deleted");
+                        break;
+
+                    case 6:
+                        System.out.println("Exiting...");
+                        break;
+
+                    default:
+                        System.out.println("Invalid Choice");
+                }
+
+            } while(choice != 6);
+
+            con.close();
+            stmt.close();
+            sc.close();
+
+        } catch(Exception e) {
+            System.out.println(e);
+        }
+    }
+}
+
+
+
+2.1 – Write a Java console program using PreparedStatement to insert a student record.
+
+package com.exp2;
+import java.sql.*;
+import java.util.Scanner;
+public class insertData {
+	public static void main(String[] args) throws Exception {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/exp"
+				,"root"
+				,"root");
+		Scanner sc = new Scanner(System.in);
+		PreparedStatement psmt = conn.prepareStatement(
+			    "INSERT INTO STUDENT (id, name, course, marks) VALUES (?, ?, ?, ?)");			System.out.print("Enter Id: ");
+		int id = sc.nextInt();
+		sc.nextLine(); 
+		System.out.print("Enter Name: ");
+		String name = sc.nextLine();
+		System.out.print("Enter Course: ");
+		String course = sc.nextLine();
+		System.out.print("Enter Marks: ");
+		int marks = sc.nextInt();
+		psmt.setInt(1, id);
+		psmt.setString(2, name);
+		psmt.setString(3, course);
+		psmt.setInt(4, marks);	
+		psmt.executeUpdate();
+		sc.close();
+		conn.close();
+}
+}
+
+
+
+
+2.2.: Write a program to retrieve a student record by ID using PreparedStatement.
+Code:
+package com.exp2;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.util.Scanner;
+import java.sql.*;
+import java.util.Scanner;
+public class retriveData{
+	public static void main(String[] args) throws Exception {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/exp"
+				,"root"
+				,"root");
+		PreparedStatement psmt = conn.prepareStatement(
+				"SELECT * FROM STUDENT WHERE ID=?"
+				);
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Enter ID: ");
+		int id = sc.nextInt();
+		psmt.setInt(1, id);
+		ResultSet rs = psmt.executeQuery();
+		if (rs.next()) {
+			System.out.println("\nID: " + rs.getInt("id"));
+            System.out.println("Name: " + rs.getString("name"));
+            System.out.println("Course: " + rs.getString("course"));
+            System.out.println("Marks: " + rs.getInt("marks"));
+
+		}
+	}
+}
+
+
+
+2.3.:Write a program to update marks of a student using PreparedStatement.
+Code:
+package com.exp2;
+import java.sql.*;
+import java.util.Scanner;
+
+public class updateData {
+
+	public static void main(String[] args) throws Exception {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/exp"
+				,"root"
+				,"root");
+		
+		PreparedStatement psmt = conn.prepareStatement(
+				"UPDATE STUDENT SET marks = ? WHERE id = ?"
+				);
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Enter ID: ");
+		int id = sc.nextInt();
+		psmt.setInt(2, id);
+		System.out.print("Enter Marks: ");
+		int marks = sc.nextInt();
+		psmt.setInt(1, marks);
+		psmt.executeUpdate();
+		System.out.println("Update Sucessful");
+	}
+
+}
+
+
+
+2.4.:Write a program to delete a student record using PreparedStatement.
+Code:
+package com.exp2;
+import java.sql.*;
+import java.util.Scanner;
+public class deleteData {
+
+	public static void main(String[] args) throws Exception {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/exp"
+				,"root"
+				,"root");
+		
+		PreparedStatement psmt = conn.prepareStatement(
+				"DELETE FROM STUDENT WHERE ID = ?"
+				);
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Enter ID: ");
+		int id = sc.nextInt();
+		sc.close();
+		psmt.setInt(1, id);
+		psmt.executeUpdate();
+		conn.close();
+		System.out.println("Data Deleted");
+		
+	}
+
+}
+
+
+2.5.:Create a Swing application with:
+●	JTextField for id
+●	JTextField for name
+●	JTextField for course
+●	JTextField for marks
+●	Insert button
+Code:
+package com.exp2;
+import javax.swing.*;
+import java.awt.GridLayout;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class insertGUI {
+	public static void main(String[] args) throws Exception {
+		
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/exp"
+				,"root"
+				,"root");
+		
+		  JFrame frame = new JFrame("Insert Data");
+	        frame.setSize(400, 300);
+	        frame.setLayout(new GridLayout(5, 2));
+
+	        JLabel idLabel = new JLabel("ID");
+	        JTextField idField = new JTextField();
+
+	        JLabel nameLabel = new JLabel("Name");
+	        JTextField nameField = new JTextField();
+
+	        JLabel courseLabel = new JLabel("Course");
+	        JTextField courseField = new JTextField();
+
+	        JLabel marksLabel = new JLabel("Marks");
+	        JTextField marksField = new JTextField();
+
+	        JButton insertButton = new JButton("Insert");
+	        frame.add(idLabel);
+	        frame.add(idField);
+	        frame.add(nameLabel);
+	        frame.add(nameField);
+	        frame.add(courseLabel);
+	        frame.add(courseField);
+	        frame.add(marksLabel);
+	        frame.add(marksField);
+	        frame.add(new JLabel()); 
+	        frame.add(insertButton);
+	        frame.setVisible(true);
+	        insertButton.addActionListener(e->{
+	        	try {
+					PreparedStatement psmt = conn.prepareStatement(
+							"INSERT INTO STUDENT VALUES (?,?,?,?)"
+							);
+					psmt.setInt(1, Integer.parseInt(idField.getText()));
+					psmt.setString(2, nameField.getText());
+					psmt.setString(3, courseField.getText());
+					psmt.setInt(4, Integer.parseInt(marksField.getText()));
+					psmt.executeUpdate();
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+	        });
+	               
+	}
+}
+
+
+
+
+ 2.6.:Create a Swing application that:
+●	Accepts student ID
+●	On clicking Search button
+●	Displays student details in JTextArea
+Use PreparedStatement.
+Code:
+package com.exp2;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.sql.*;
+public class retriveGUI {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Search Student");
+        frame.setSize(400, 250);
+        frame.setLayout(new GridLayout(3, 2)); 
+        JLabel idLabel = new JLabel("Enter Student ID:");
+        JTextField idField = new JTextField();
+        JButton searchButton = new JButton("Search");
+        JTextArea resultArea = new JTextArea();
+        resultArea.setEditable(false);
+        frame.add(idLabel);
+        frame.add(idField);
+        frame.add(new JLabel()); 
+        frame.add(searchButton);
+        frame.add(new JLabel("Result:"));
+        frame.add(new JScrollPane(resultArea));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+        searchButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    int id = Integer.parseInt(idField.getText().trim());
+
+                    Class.forName("com.mysql.cj.jdbc.Driver");
+                    Connection conn = DriverManager.getConnection(
+                        "jdbc:mysql://localhost:3306/exp", "root", "root"
+                    );
+
+                    PreparedStatement psmt = conn.prepareStatement(
+                        "SELECT * FROM STUDENT WHERE ID=?"
+                    );
+                    psmt.setInt(1, id);
+
+                    ResultSet rs = psmt.executeQuery();
+
+                    if (rs.next()) {
+                        resultArea.setText(
+                            "ID: " + rs.getInt("id") + "\n" +
+                            "Name: " + rs.getString("name") + "\n" +
+                            "Course: " + rs.getString("course") + "\n" +
+                            "Marks: " + rs.getInt("marks")
+                        );
+                    } else {
+                        resultArea.setText("No record found for ID: " + id);
+                    }
+
+                    rs.close();
+                    psmt.close();
+                    conn.close();
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(frame, "Error: " + ex.getMessage());
+                }
+            }
+        });
+    }
+}
+
+
+
+2.7.:Create a Swing application with buttons:
+●	Insert
+●	Search
+●	Update
+●	Delete
+●	Clear
+All operations must use PreparedStatement.
+Code:
+package com.exp2;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.sql.*;
+
+public class StudentCRUDApp {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("Student CRUD Application");
+        frame.setSize(500, 400);
+        frame.setLayout(new FlowLayout());
+
+        JLabel idLabel = new JLabel("ID");
+        JTextField idField = new JTextField();
+
+        JLabel nameLabel = new JLabel("Name");
+        JTextField nameField = new JTextField();
+
+        JLabel courseLabel = new JLabel("Course");
+        JTextField courseField = new JTextField();
+
+        JLabel marksLabel = new JLabel("Marks");
+        JTextField marksField = new JTextField();
+
+        JTextArea resultArea = new JTextArea();
+        resultArea.setEditable(false);
+
+        JButton insertBtn = new JButton("Insert");
+        JButton searchBtn = new JButton("Search");
+        JButton updateBtn = new JButton("Update");
+        JButton deleteBtn = new JButton("Delete");
+        JButton clearBtn = new JButton("Clear");
+
+      
+        frame.add(idLabel); frame.add(idField);
+        frame.add(nameLabel); frame.add(nameField);
+        frame.add(courseLabel); frame.add(courseField);
+        frame.add(marksLabel); frame.add(marksField);
+        frame.add(insertBtn); frame.add(searchBtn);
+        frame.add(updateBtn); frame.add(deleteBtn);
+        frame.add(clearBtn); frame.add(new JScrollPane(resultArea));
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+
+        // Database connection details
+        String url = "jdbc:mysql://localhost:3306/exp";
+        String user = "root";
+        String pass = "root";
+
+       
+        insertBtn.addActionListener(e -> {
+            try (Connection conn = DriverManager.getConnection(url, user, pass)) {
+                PreparedStatement psmt = conn.prepareStatement(
+                    "INSERT INTO STUDENT (id, name, course, marks) VALUES (?, ?, ?, ?)"
+                );
+                psmt.setInt(1, Integer.parseInt(idField.getText()));
+                psmt.setString(2, nameField.getText());
+                psmt.setString(3, courseField.getText());
+                psmt.setInt(4, Integer.parseInt(marksField.getText()));
+                psmt.executeUpdate();
+                resultArea.setText("Record inserted successfully!");
+            } catch (Exception ex) {
+                resultArea.setText("Error: " + ex.getMessage());
+            }
+        });
+
+        
+        searchBtn.addActionListener(e -> {
+            try (Connection conn = DriverManager.getConnection(url, user, pass)) {
+                PreparedStatement psmt = conn.prepareStatement(
+                    "SELECT * FROM STUDENT WHERE id=?"
+                );
+                psmt.setInt(1, Integer.parseInt(idField.getText()));
+                ResultSet rs = psmt.executeQuery();
+                if (rs.next()) {
+                    resultArea.setText(
+                        "ID: " + rs.getInt("id") + "\n" +
+                        "Name: " + rs.getString("name") + "\n" +
+                        "Course: " + rs.getString("course") + "\n" +
+                        "Marks: " + rs.getInt("marks")
+                    );
+                } else {
+                    resultArea.setText("No record found.");
+                }
+            } catch (Exception ex) {
+                resultArea.setText("Error: " + ex.getMessage());
+            }
+        });
+
+     
+        updateBtn.addActionListener(e -> {
+            try (Connection conn = DriverManager.getConnection(url, user, pass)) {
+                PreparedStatement psmt = conn.prepareStatement(
+                    "UPDATE STUDENT SET name=?, course=?, marks=? WHERE id=?"
+                );
+                psmt.setString(1, nameField.getText());
+                psmt.setString(2, courseField.getText());
+                psmt.setInt(3, Integer.parseInt(marksField.getText()));
+                psmt.setInt(4, Integer.parseInt(idField.getText()));
+                int rows = psmt.executeUpdate();
+                resultArea.setText(rows > 0 ? "Record updated successfully!" : "No record found.");
+            } catch (Exception ex) {
+                resultArea.setText("Error: " + ex.getMessage());
+            }
+        });
+
+       
+        deleteBtn.addActionListener(e -> {
+            try (Connection conn = DriverManager.getConnection(url, user, pass)) {
+                PreparedStatement psmt = conn.prepareStatement(
+                    "DELETE FROM STUDENT WHERE id=?"
+                );
+                psmt.setInt(1, Integer.parseInt(idField.getText()));
+                int rows = psmt.executeUpdate();
+                resultArea.setText(rows > 0 ? "Record deleted successfully!" : "No record found.");
+            } catch (Exception ex) {
+                resultArea.setText("Error: " + ex.getMessage());
+            }
+        });
+
+        clearBtn.addActionListener(e -> {
+            idField.setText("");
+            nameField.setText("");
+            courseField.setText("");
+            marksField.setText("");
+            resultArea.setText("");
+        });
+    }
+}
+
+
+
+3.1. Write a console program that:
+●	Creates a Scrollable ResultSet
+●	Displays first record
+●	Displays last record
+●	Moves to 2nd record using absolute(2)
+●	Displays total number of records
+
+Code:
+import java.sql.*;
+public class Assignment3_1 {
+    public static void main(String[] args) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/exp", "root", "root");
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM student");
+            if (rs.first()) System.out.println("First: " + rs.getString("name"));
+            if (rs.last()) {
+                System.out.println("Last: " + rs.getString("name"));
+                System.out.println("Total Records: " + rs.getRow());
+            }
+            if (rs.absolute(2)) {
+                System.out.println("Second Record: " + rs.getString("name"));
+            }
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+
+
+
+3.2. Write a console program that:
+●	Moves to a particular record
+●	Updates marks using updateInt()
+●	Calls updateRow()
+●	Displays updated record
+Code:
+import java.sql.*;
+
+public class Assignment3_2 {
+    public static void main(String[] args) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/exp", "root", "root");
+
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM student");
+
+            if (rs.absolute(2)) {
+                rs.updateInt("marks", 98);
+                
+                rs.updateRow();
+
+                System.out.println("Row 2 updated. New Marks: " + rs.getInt("marks"));
+            }
+
+            con.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+
+
+3.3. Create a Swing application with:
+●	TextFields: id, name, course, marks
+●	Buttons:
+o	First
+o	Previous
+o	Next
+o	Last
+Code:
+import javax.swing.*;
+import java.awt.*;
+import java.sql.*;
+
+public class Assignment3_3 extends JFrame {
+    JTextField txtId, txtName, txtCourse, txtMarks;
+    JButton btnFirst, btnPrev, btnNext, btnLast;
+    ResultSet rs;
+
+    public Assignment3_3() {
+        setTitle("Student Navigation");
+        setLayout(new GridLayout(5, 2, 10, 10));
+
+        add(new JLabel("ID:")); txtId = new JTextField(); add(txtId);
+        add(new JLabel("Name:")); txtName = new JTextField(); add(txtName);
+        add(new JLabel("Course:")); txtCourse = new JTextField(); add(txtCourse);
+        add(new JLabel("Marks:")); txtMarks = new JTextField(); add(txtMarks);
+
+        btnFirst = new JButton("First"); btnPrev = new JButton("Previous");
+        btnNext = new JButton("Next"); btnLast = new JButton("Last");
+        add(btnFirst); add(btnPrev); add(btnNext); add(btnLast);
+
+        initDB();
+
+        btnFirst.addActionListener(e -> { try { rs.first(); showData(); } catch(Exception ex){} });
+        btnLast.addActionListener(e -> { try { rs.last(); showData(); } catch(Exception ex){} });
+        btnNext.addActionListener(e -> { try { if(rs.next()) showData(); else rs.last(); } catch(Exception ex){} });
+        btnPrev.addActionListener(e -> { try { if(rs.previous()) showData(); else rs.first(); } catch(Exception ex){} });
+
+        setSize(400, 300);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+    }
+
+    private void initDB() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/exp", "root", "root");
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            rs = stmt.executeQuery("SELECT * FROM student");
+            rs.next(); showData();
+        } catch (Exception e) { e.printStackTrace(); }
+    }
+
+    private void showData() throws SQLException {
+        txtId.setText(rs.getString("id"));
+        txtName.setText(rs.getString("name"));
+        txtCourse.setText(rs.getString("course"));
+        txtMarks.setText(rs.getString("marks"));
+    }
+
+    public static void main(String[] args) { new Assignment3_3(); }
+}
+
+
+
+
+3.4. Enhance previous GUI by adding:
+●	Update button
+Code:
+import javax.swing.*;
+import java.awt.*;
+import java.sql.*;
+
+public class Assignment3_4 extends JFrame {
+    JTextField txtId, txtName, txtCourse, txtMarks;
+    JButton btnFirst, btnPrev, btnNext, btnLast, btnUpdate;
+    ResultSet rs;
+
+    public Assignment3_4() {
+        setTitle("Student Manager PRO");
+        setLayout(new GridLayout(6, 2, 10, 10));
+
+        add(new JLabel("ID:")); txtId = new JTextField(); add(txtId);
+        add(new JLabel("Name:")); txtName = new JTextField(); add(txtName);
+        add(new JLabel("Course:")); txtCourse = new JTextField(); add(txtCourse);
+        add(new JLabel("Marks:")); txtMarks = new JTextField(); add(txtMarks);
+
+        btnFirst = new JButton("First"); btnPrev = new JButton("Prev");
+        btnNext = new JButton("Next"); btnLast = new JButton("Last");
+        btnUpdate = new JButton("Update Record");
+
+        add(btnFirst); add(btnPrev); add(btnNext); add(btnLast);
+        add(new JLabel("Action:")); add(btnUpdate);
+
+        initDB();
+
+        btnFirst.addActionListener(e -> { try { rs.first(); showData(); } catch(Exception ex){} });
+        btnLast.addActionListener(e -> { try { rs.last(); showData(); } catch(Exception ex){} });
+        btnNext.addActionListener(e -> { try { if(rs.next()) showData(); } catch(Exception ex){} });
+        btnPrev.addActionListener(e -> { try { if(rs.previous()) showData(); } catch(Exception ex){} });
+
+        btnUpdate.addActionListener(e -> {
+            try {
+                rs.updateInt("marks", Integer.parseInt(txtMarks.getText()));
+                rs.updateRow();
+                JOptionPane.showMessageDialog(this, "Data Updated Successfully!");
+            } catch (Exception ex) { JOptionPane.showMessageDialog(this, "Update Failed!"); }
+        });
+
+        setSize(400, 350);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setVisible(true);
+    }
+
+    private void initDB() {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/exp", "root", "root");
+            Statement stmt = con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            rs = stmt.executeQuery("SELECT * FROM student");
+            rs.next(); showData();
+        } catch (Exception e) { e.printStackTrace(); }
+    }
+
+    private void showData() throws SQLException {
+        txtId.setText(rs.getString("id"));
+        txtName.setText(rs.getString("name"));
+        txtCourse.setText(rs.getString("course"));
+        txtMarks.setText(rs.getString("marks"));
+    }
+
+    public static void main(String[] args) { new Assignment3_4(); }
+}
+
+
+
+4.1. Write a Servlet program to create a cookie that stores the username and display the stored username in another servlet.
+Code:
+storeCookie.java
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+
+@WebServlet("/storeCookie")
+public class storeCookie extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String name = request.getParameter("username");
+		Cookie ck = new Cookie("username", name);
+		response.addCookie(ck);
+		response.setContentType("text/html");
+		PrintWriter p = response.getWriter();
+		p.println(
+				"<p>Cookies Stored</p><br>"
+				+ "<a href='displayCookie'> Show Cookies</a>"
+				);
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		doGet(request, response);
+	}
+
+}
+
+
+displayCookie.java
+
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Cookie;
+
+@WebServlet("/displayCookie")
+public class displayCookie extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Cookie[] cookies = request.getCookies();
+		String value = null;
+		if (cookies != null) {
+		    for (Cookie cookie : cookies) {
+		        if ("username".equals(cookie.getName())) {
+		            value = cookie.getValue();
+		            break;
+		        }
+		    }
+		    response.setContentType("text/html");
+		    PrintWriter p = response.getWriter();
+		    p.println("<h1> Welcome "+value+"</h1>");
+		    
+		}
+	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+}
+cookieGet.html
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Get Cookies</title>
+</head>
+<body>
+<form action="storeCookie" method="get">	
+	Username: <input type="text" name = "username"><br><br>
+	<input type="submit" value="Submit">
+</form>
+</body>
+</html>
+
+
+
+
+4.2.A weather servlet is a servlet that receives a request for the weather of a particular city from the user. When the user accesses this servlet and if there is a cookie called city on the client side then it should return the value of cookie and display the weather of the city. If the cookie is absent it redirects to an HTML file that displays the name of cities for which weather info can be obtained.
+Code:
+WeatherServlet.java
+
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
+@WebServlet("/WeatherServlet")
+public class WeatherServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		  response.setContentType("text/html");
+	        PrintWriter out = response.getWriter();
+
+	        Cookie cookies[] = request.getCookies();
+
+	        boolean cityFound = false;
+	        String cityName = "";
+
+	        if(cookies != null) {
+	            for(int i = 0; i < cookies.length; i++) {
+
+	                if(cookies[i].getName().equals("city")) {
+
+	                    cityName = cookies[i].getValue();
+	                    cityFound = true;
+
+	                    out.println("<html><body>");
+	                    out.println("<h2>Weather Report</h2>");
+	                    out.println("<h3>City: " + cityName + "</h3>");
+
+
+	                    if(cityName.equals("Pune"))
+	                        out.println("Weather: Pleasant, 25°C");
+	                    else if(cityName.equals("Mumbai"))
+	                        out.println("Weather: Humid, 30°C");
+	                    else if(cityName.equals("Delhi"))
+	                        out.println("Weather: Hot, 35°C");
+
+	                    out.println("</body></html>");
+
+	                    break;
+	                }
+	            }
+	        }
+
+	        if(!cityFound) {
+
+	            response.sendRedirect("cities.html");
+	        }}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+}
+
+SetCityCookie.java
+
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/SetCityCookie")
+public class SetCityCookie extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		 String city = request.getParameter("city");
+
+	        Cookie cookie = new Cookie("city", city);
+	        response.addCookie(cookie);
+
+	        response.sendRedirect("WeatherServlet");}
+
+	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+}
+
+Cities.html
+<html>
+<head>
+<title>Select City</title>
+</head>
+
+<body>
+
+<h2>Select City for Weather Information</h2>
+
+<form action="SetCityCookie" method="get">
+
+<select name="city">
+
+<option value="Pune">Pune</option>
+<option value="Mumbai">Mumbai</option>
+<option value="Delhi">Delhi</option>
+
+</select>
+
+<br><br>
+
+<input type="submit" value="Get Weather">
+
+</form>
+
+</body>
+</html>
+
+
+5.1 Write a Servlet that accepts a User Name from a HTML form and stores it as a session variable. Write another Servlet that returns the value of this session variable and displays it.
+Code:
+
+
+getData.java
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+@WebServlet("/getData")
+public class getData extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String name = request.getParameter("username");
+		HttpSession session = request.getSession();
+		session.setAttribute("username", name);
+		response.setContentType("text/html");
+		PrintWriter p = response.getWriter();
+		p.println("<p>Session Created, Username Stored"
+				+"<br>"
+				+ "<a href='displaySession'>Display Session</a>");
+	
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+}
+
+diaplaySession.java
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+
+@WebServlet("/displaySession")
+public class displaySession extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+       
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		String name = (String) session.getAttribute("username");
+		response.setContentType("text/html");
+		PrintWriter p = response.getWriter();
+		p.println("<h1>Welcome "+name+"</h1>");
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+}
+Login.html
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="getData" method="get">
+Name: <input type="text" name = "username"><br><br>
+<input type="submit" value="Submit">
+</form>
+</body>
+</html>
+
+
+
+
+
+5.2. Create a project for Raj Spa as follows:
+A HTML form should display the services(face Spa,Body Spa,Foot Spa) with fixed charges in the form of checkboxes. On click of submit button these services should be stored in a session variable and a next HTML form should display the discount options(None,5%,10% and 15%) which would be stored in session variable. The last page should display the services selected and their charges, the discount and net payable.Use servlet.
+Code:
+Service.html
+<!DOCTYPE html>
+<html>
+<head>
+<title>Spa Services</title>
+</head>
+
+<body>
+
+<h2>Select Spa Services</h2>
+
+<form action="ServiceServlet" method="post">
+
+<input type="checkbox" name="service" value="Face Spa"> Face Spa (₹500)<br>
+
+<input type="checkbox" name="service" value="Body Spa"> Body Spa (₹1000)<br>
+
+<input type="checakbox" name="service" value="Foot Spa"> Foot Spa (₹300)<br><br>
+
+<input type="submit" value="Submit">
+
+</form>
+
+</body>
+</html>
+Discount.html
+<!DOCTYPE html>
+<html>
+<head>
+<title>Discount</title>
+</head>
+
+<body>
+
+<h2>Select Discount</h2>
+
+<form action="DiscountServlet" method="post">
+
+<input type="radio" name="discount" value="0"> None<br>
+<input type="radio" name="discount" value="5"> 5%<br>
+<input type="radio" name="discount" value="10"> 10%<br>
+<input type="radio" name="discount" value="15"> 15%<br><br>
+
+<input type="submit" value="Calculate Bill">
+
+</form>
+
+</body>
+</html>
+
+ServiceServlet.java
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+@WebServlet("/ServiceServlet")
+public class ServiceServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+  
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String services[] = request.getParameterValues("service");
+        HttpSession session = request.getSession();
+        session.setAttribute("services", services);
+        response.sendRedirect("discount.html");}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+}
+
+DiscountServlet.java
+
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+@WebServlet("/DiscountServlet")
+public class DiscountServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		 HttpSession session = request.getSession();
+
+	        String services[] = (String[]) session.getAttribute("services");
+
+	        String discountStr = request.getParameter("discount");
+
+	        session.setAttribute("discount", discountStr);
+
+	        int total = 0;
+
+	        PrintWriter out = response.getWriter();
+
+	        out.println("<html><body>");
+
+	        out.println("<h2>Selected Services</h2>");
+
+	        if(services != null)
+	        {
+	            for(String service : services)
+	            {
+	                if(service.equals("Face Spa"))
+	                {
+	                    out.println("Face Spa : ₹500<br>");
+	                    total += 500;
+	                }
+
+	                if(service.equals("Body Spa"))
+	                {
+	                    out.println("Body Spa : ₹1000<br>");
+	                    total += 1000;
+	                }
+
+	                if(service.equals("Foot Spa"))
+	                {
+	                    out.println("Foot Spa : ₹300<br>");
+	                    total += 300;
+	                }
+	            }
+	        }
+
+	        int discount = Integer.parseInt(discountStr);
+
+	        double discountAmount = total * discount / 100.0;
+
+	        double netAmount = total - discountAmount;
+
+	        out.println("<br>Total = ₹" + total);
+
+	        out.println("<br>Discount = " + discount + "%");
+
+	        out.println("<br>Net Payable = ₹" + netAmount);
+
+	        out.println("</body></html>");
+	    
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+}
+
+
+
+5.3. Create a project for FilmWare awards as follows:
+HTML accepts the name of Best Movie(out of four options)should allow selection of Best Actor Male(out  of Four options), next html form should allow selection of Best Actor Female(out of four options) which would be stored in a session variable. The last page should 
+Code:
+Movie.html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Best Movie</title>
+</head>
+<body>
+    <h2>Select Best Movie</h2>
+
+    <form action="ActorMaleServlet" method="post">
+        <input type="radio" name="movie" value="RRR"> RRR <br>
+        <input type="radio" name="movie" value="Jawan"> Jawan <br>
+        <input type="radio" name="movie" value="Pathaan"> Pathaan <br>
+        <input type="radio" name="movie" value="Animal"> Animal <br><br>
+
+        <input type="submit" value="Next">
+    </form>
+</body>
+</html>
+ActorMaleServlet.java
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.WebServlet;
+
+@WebServlet("/ActorMaleServlet")
+public class ActorMaleServlet extends HttpServlet {
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String movie = request.getParameter("movie");
+
+        HttpSession session = request.getSession();
+        session.setAttribute("movie", movie);
+
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+
+        out.println("<h2>Select Best Actor (Male)</h2>");
+        out.println("<form action='ActorFemaleServlet' method='post'>");
+
+        out.println("<input type='radio' name='male' value='Shah Rukh Khan'> Shah Rukh Khan <br>");
+        out.println("<input type='radio' name='male' value='Ranbir Kapoor'> Ranbir Kapoor <br>");
+        out.println("<input type='radio' name='male' value='Ranveer Singh'> Ranveer Singh <br>");
+        out.println("<input type='radio' name='male' value='Hrithik Roshan'> Hrithik Roshan <br><br>");
+
+        out.println("<input type='submit' value='Next'>");
+        out.println("</form>");
+    }
+}
+
+ActorFemaleServlet.java
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.WebServlet;
+
+@WebServlet("/ActorFemaleServlet")
+public class ActorFemaleServlet extends HttpServlet {
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String male = request.getParameter("male");
+
+        HttpSession session = request.getSession();
+        session.setAttribute("male", male);
+
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+
+        out.println("<h2>Select Best Actor (Female)</h2>");
+        out.println("<form action='ResultServlet' method='post'>");
+
+        out.println("<input type='radio' name='female' value='Alia Bhatt'> Alia Bhatt <br>");
+        out.println("<input type='radio' name='female' value='Deepika Padukone'> Deepika Padukone <br>");
+        out.println("<input type='radio' name='female' value='Katrina Kaif'> Katrina Kaif <br>");
+        out.println("<input type='radio' name='female' value='Kriti Sanon'> Kriti Sanon <br><br>");
+
+        out.println("<input type='submit' value='Show Result'>");
+        out.println("</form>");
+    }
+}
+
+ResultServlet.java
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.WebServlet;
+
+@WebServlet("/ResultServlet")
+public class ResultServlet extends HttpServlet {
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String female = request.getParameter("female");
+
+        HttpSession session = request.getSession();
+        session.setAttribute("female", female);
+
+        String movie = (String) session.getAttribute("movie");
+        String male = (String) session.getAttribute("male");
+
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+
+        out.println("<h2> Filmfare Awards Result</h2>");
+        out.println("Best Movie: " + movie + "<br>");
+        out.println("Best Actor (Male): " + male + "<br>");
+        out.println("Best Actor (Female): " + female + "<br>");
+    }
+}
+
+
+
+
+6.1: Page Directive Demonstration
+
+
+ Create a JSP page to demonstrate the use of the page directive. The page should import the java.util.Date class using the page directive and display the current date and time on the browser. Also ensure that the content type of the page is properly set using the directive.
+Code:
+Date.html
+<%@ page import="java.util.Date" contentType="text/html;charset=UTF-8" %>
+<html>
+<body>
+<h2>Current Date and Time</h2>
+<%
+    Date d = new Date();
+    out.println(d);
+%>
+</body>
+</html>
+
+
+
+6.2.: Include Directive (Static Include)
+ Develop a JSP application to demonstrate the use of the include directive. Create a separate JSP file named header.jsp that contains a heading or title of a website. Then create another JSP page named home.jsp and include the header.jsp file using the include directive. Display some additional content below the included header to show how reusable components can be used
+Code:
+Home.jsp
+<%@ include file="Date.jsp" %>
+<h2>Welcome to Home Page</h2>
+<p>This is static include example.</p>
+
+
+6.3.: JSP Action Tag <jsp:include>
+ Create a JSP application to demonstrate dynamic inclusion using the <jsp:include> action tag. Design a JSP page named menu.jsp that contains a list of links such as Home, About, and Contact. Then create another page named main.jsp and include menu.jsp dynamically using the <jsp:include> tag. Display a welcome message on the main page along with the included menu.
+Code:
+Menu.jsp
+<ul>
+    <li>Home</li>
+    <li>About</li>
+    <li>Contact</li>
+</ul>
+<hr>
+Main.jsp
+<html>
+<body>
+<h2>Welcome to Main Page</h2>
+<jsp:include page="menu.jsp" />
+<p>This is dynamic include example.</p>
+</body>
+</html>
+
+
+6.4: Difference Between Include Directive and <jsp:include>
+ Develop a JSP program to compare the include directive and the <jsp:include> action tag. Create a JSP file that displays some dynamic content (for example, current time or a value passed through request parameters). Include this file in one JSP page using the include directive and in another JSP page using the <jsp:include> tag. Observe the output in both cases and explain the difference between static and dynamic inclusion.
+Code:
+Dynamic.jsp
+<%
+    out.println("Current Time: " + new java.util.Date() + "<br>");
+    
+    String name = request.getParameter("name");
+    if(name != null){
+        out.println("Hello " + name);
+    }
+%>
+
+staticInculde.jsp
+<%@ include file="dynamic.jsp" %>
+
+<h3>This is Static Include Page</h3>
+
+dynaicInclude.jsp
+<html>
+<body>
+
+<h3>This is Dynamic Include Page</h3>
+
+<jsp:include page="dynamic.jsp">
+    <jsp:param name="name" value="Shriyash" />
+</jsp:include>
+
+</body>
+</html>
+
+
+
+
+6.5: JSP Action Tag <jsp:forward>
+ Create a JSP-based application to demonstrate request forwarding using the <jsp:forward> action tag. Design a page named input.jsp that accepts user input such as a name through a form. After submission, forward the request to another page named welcome.jsp using <jsp:forward>. The welcome.jsp page should retrieve the user input and display a personalized welcome message.
+Code:
+Input.jsp
+<html>
+<body>
+
+<h2>Enter Your Name</h2>
+
+<form action="welcome.jsp" method="post">
+    Name: <input type="text" name="username">
+    <input type="submit" value="Submit">
+</form>
+
+</body>
+</html>
+Welcome.jsp
+<%
+    String name = request.getParameter("username");
+%>
+
+<jsp:forward page="display.jsp">
+    <jsp:param name="user" value="<%= name %>" />
+</jsp:forward>
+Display.jsp
+<%
+    String user = request.getParameter("user");
+%>
+
+<h2>Welcome, <%= user %>!</h2>
+
+
+
+7.1. Design a JSP page that accepts a user’s name from an HTML form and displays a personalized welcome message using the entered data. If the user submits the form without entering a name, the application should display a suitable message such as “Name cannot be empty. 
+
+Input:
+
+Index.html
+<body>  
+<h2>Enter Your Name</h2>  
+<form action="welcome.jsp" method="post">  
+Name: <input type="text" name="username">  
+<br><br>  
+<input type="submit" value="Submit">  
+</form>  
+</body>
+
+Welcome.jsp
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>  
+<head>  
+<title>Welcome Page</title>  
+</head>  
+<body>  
+<h2>Welcome Page</h2>  
+<%  
+String name = request.getParameter("username");  
+if(name == null || name.trim().equals("")) {  
+%>  
+<p style="color:red;">Name cannot be empty.</p>  
+<%  
+} else {  
+%>  
+<p>Welcome, <%= name %>!</p>  
+<%  
+}  
+%> 
+</body> 
+</html>
+
+
+
+
+7.2. Create a login page where the user enters a username. Store the username in a session and display a welcome message on multiple pages without asking again. Develop additional pages such as a home page or profile page that retrieve the username from the session and display a personalized welcome message. The application should also include a logout mechanism that invalidates the session and redirects the user back to the login page. 
+
+Input:
+Login.jsp 
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>  
+<body>  
+	<h2>Login Page</h2>  
+	<form action="home.jsp" method="post">  
+		Username: <input type="text" name="username">  
+		<br><br>  
+		<input type="submit" value="Login">  
+	</form>  
+</body> 
+</html>
+
+Home.jsp
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>  
+<body>  
+	<%  
+	String user = request.getParameter("username");  
+	if(user != null && !user.trim().equals("")) {  
+	session.setAttribute("user", user);  
+	}  
+	String username = (String) session.getAttribute("user");  
+	if(username == null) {  
+	response.sendRedirect("login.jsp");  
+	}  
+	%>  
+	<h2>Welcome, <%= username %>!</h2>  
+	<a href="profile.jsp">Go to Profile</a><br>  
+	<a href="logout.jsp">Logout</a>  
+</body> 
+</html> 
+
+Profile.jsp
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>  
+<body>  
+	<%  
+	String username = (String) session.getAttribute("user");  
+	if(username == null) {  
+	response.sendRedirect("login.jsp");  
+	}  
+	%>  
+	<h2>User Profile</h2>  
+	<p>Welcome, <%= username %>!</p>  
+	<a href="home.jsp">Back to Home</a><br>  
+	<a href="logout.jsp">Logout</a>  
+</body> 
+</html>
+
+Logout.jsp
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%  
+session.invalidate();  
+response.sendRedirect("login.jsp");  
+%>
+
+
+
+7.3. Develop a JSP application that tracks and displays the total number of visitors accessing a webpage. The application should use the application implicit object to maintain a global counter that is shared among all users. Each time the page is accessed, the application should check whether the counter already exists; if not, it should initialize it. Otherwise, it should increment the existing value by one and display the updated visitor count on the page. The counter should persist across multiple users and sessions, demonstrating how application-level data is shared in JSP. 
+
+Input:
+<%@ page language="java" %>  
+<html>  
+	<body>  
+	<h2>Visitor Counter</h2>  
+	<%  
+		Integer count = (Integer) application.getAttribute("visitorCount");  
+		if(count == null) { 
+		count = 1;  
+		} 
+		else { count = 
+		count + 1;  
+		}  
+		application.setAttribute("visitorCount", count);  
+	%>  
+<p>Total Visitors: <%= count %></p>  
+</body>  
+</html>
+
+
+
+7.4. Create a JSP page that checks user input and redirects to different pages (success/error) based on the input. 
+
+Input:
+Index.html
+<%@ page language="java" %>  
+<html>  
+<body>  
+<h2>Login Form</h2>  
+<form action="check.jsp" method="post">  
+	Username: <input type="text" name="username"><br><br>  
+	Password: <input type="password" name="password"><br><br>  
+	<input type="submit" value="Submit">  
+</form>  
+</body> 
+</html>
+
+Check.jsp
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+String user = request.getParameter("username");
+String pass = request.getParameter("password");
+
+if(user != null && pass != null && user.equals("admin") && pass.equals("1234")) {
+    response.sendRedirect("success.jsp");
+} else {
+    response.sendRedirect("error.jsp");
+}
+%>
+Error.jsp
+<%@ page language="java" %>  
+<html>  
+<body>  
+<h2 style="color:red;">Login Failed!</h2>  
+<p>Invalid Username or Password.</p>  
+</body>  
+</html> 
+Success.jsp
+<%@ page language="java" %>  
+<html>  
+<body>  
+
+<h2 style="color:green;">Login Successful!</h2>  
+<p>Welcome, Admin!</p>  
+</body> 
+</html>
+
+
+
+
+
+8.1. A college wants to develop a web-based system where students can enter their marks and view results. Design an MVC-based application where: 
+●JSP form accepts student name and marks (3 subjects). 
+●Servlet calculates total and percentage.
+●Model class stores student data. 
+●JSP displays result. 
+
+Input:
+Student.java
+public class Student {
+    private String name;
+    private int m1, m2, m3;
+    private int total;
+    private double percentage;
+
+    public Student(String name, int m1, int m2, int m3) {
+        this.name = name;
+        this.m1 = m1;
+        this.m2 = m2;
+        this.m3 = m3;
+
+        this.total = m1 + m2 + m3;
+        this.percentage = total / 3.0;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public double getPercentage() {
+        return percentage;
+    }
+}
+Index.jsp
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Student Marks Entry</h2>
+
+<form action="StudentServlet" method="post">
+    Name: <input type="text" name="name"><br><br>
+
+    Subject 1: <input type="number" name="m1"><br><br>
+    Subject 2: <input type="number" name="m2"><br><br>
+    Subject 3: <input type="number" name="m3"><br><br>
+
+    <input type="submit" value="Calculate">
+</form>
+
+</body>
+</html>
+StudentServlet.java
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+public class StudentServlet extends HttpServlet {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String name = request.getParameter("name");
+        int m1 = Integer.parseInt(request.getParameter("m1"));
+        int m2 = Integer.parseInt(request.getParameter("m2"));
+        int m3 = Integer.parseInt(request.getParameter("m3"));
+        Student s = new Student(name, m1, m2, m3);
+        request.setAttribute("student", s);
+
+        RequestDispatcher rd = request.getRequestDispatcher("result.jsp");
+        rd.forward(request, response);
+    }
+}
+
+Result.jsp
+
+<%@ page import="Student" %>
+
+<html>
+<body>
+
+<h2>Student Result</h2>
+
+<%
+    Student s = (Student) request.getAttribute("student");
+%>
+
+Name: <%= s.getName() %> <br><br>
+Total: <%= s.getTotal() %> <br><br>
+Percentage: <%= s.getPercentage() %> %
+
+</body>
+</html>
+
+
+
+8.2. A company wants a login system for employees. 
+1. Create a login page using JSP. 2. Servlet should validate: ○ Username: admin ○ Password: admin123 3. If valid → redirect to dashboard JSP 4. If invalid → show error message on same page 
+
+Input:
+Index.jsp
+<html>  
+<body>  
+<h2>Employee Login</h2>  
+<form action="LoginServlet" method="post">  
+Username: <input type="text" name="username"><br><br>  
+Password: <input type="password" name="password"><br><br>  
+<input type="submit" value="Login">  
+</form>  
+<%  
+String error = (String) request.getAttribute("error"); 
+if(error != null){  
+%>  
+<p style="color:red;"><%= error %></p>  
+<% } %>  
+</body>  
+</html> 
+
+LoginServlet.java
+import java.io.IOException;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+@WebServlet("/LoginServlet")
+public class LoginServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+  	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        if (username.equals("admin") && password.equals("admin123")) {
+            response.sendRedirect("dashboard.jsp");
+        } else {
+            request.setAttribute("error", "Invalid Username or Password");
+            RequestDispatcher rd = request.getRequestDispatcher("login.jsp");
+            rd.forward(request, response);
+        }
+	}
+
+Dashboard.jsp
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>  
+<body>  
+<h2>Welcome to Dashboard</h2>  
+<p>Login Successful!</p>  
+</body>  
+</html> 
+
+
+
+
+8.3. A shop wants a billing system where users select products and quantity. 
+1. JSP form to input: 
+○ Product name 
+○ Price 
+○ Quantity
+2. Servlet calculates: 
+○ Total amount
+○ GST (18%) 
+○ Final bill 
+3. Model class stores product details 
+4. JSP displays bill in formatted table 
+
+Input:
+Bill.jsp
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Shop Billing System</h2>
+
+<form action="BillingServlet" method="post">
+    Product Name: <input type="text" name="name" required><br><br>
+    Price: <input type="number" name="price" step="0.01" required><br><br>
+    Quantity: <input type="number" name="quantity" required><br><br>
+
+    <input type="submit" value="Generate Bill">
+</form>
+
+</body>
+</html>
+
+
+Product.java
+package com;
+
+public class Product {
+
+    private String name;
+    private double price;
+    private int quantity;
+    private double total;
+    private double gst;
+    private double finalAmount;
+
+    public Product(String name, double price, int quantity) {
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.total = price * quantity;
+        this.gst = total * 0.18;
+        this.finalAmount = total + gst;
+    }
+
+    public String getName() { return name; }
+    public double getPrice() { return price; }
+    public int getQuantity() { return quantity; }
+    public double getTotal() { return total; }
+    public double getGst() { return gst; }
+    public double getFinalAmount() { return finalAmount; }
+}
+
+BillingServlet.java
+package com;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+@WebServlet("/BillingServlet")
+public class BillingServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+ 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String name = request.getParameter("name");
+        double price = Double.parseDouble(request.getParameter("price"));
+        int quantity = Integer.parseInt(request.getParameter("quantity"));
+
+        Product p = new Product(name, price, quantity);
+
+        request.setAttribute("product", p);
+
+        RequestDispatcher rd = request.getRequestDispatcher("result2.jsp");
+        rd.forward(request, response);
+	}
+
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
+	}
+
+}
+
+Result.jsp
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<%@ page import="com.Product" %>
+
+<html>
+<body>
+
+<h2>Bill Receipt</h2>
+
+<%
+    Product p = (Product) request.getAttribute("product");
+%>
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>Product</th>
+        <th>Price</th>
+        <th>Quantity</th>
+        <th>Total</th>
+    </tr>
+
+    <tr>
+        <td><%= p.getName() %></td>
+        <td><%= p.getPrice() %></td>
+        <td><%= p.getQuantity() %></td>
+        <td><%= p.getTotal() %></td>
+    </tr>
+
+    <tr>
+        <td colspan="3">GST (18%)</td>
+        <td><%= p.getGst() %></td>
+    </tr>
+
+    <tr>
+        <td colspan="3"><b>Final Amount</b></td>
+        <td><b><%= p.getFinalAmount() %></b></td>
+    </tr>
+</table>
+
+</body>
+</html>
+
+
+
+9.1. Payment Processing System In a modern e-commerce platform, customers are provided with multiple payment options such as credit card, debit card, and UPI. The system should be designed in such a way that the payment method can be selected and changed dynamically without modifying the core business logic of the application. Develop a Spring-based application that uses Dependency Injection to integrate different payment services. The application should define a common interface for payment processing and implement multiple payment methods. The main service class should use the injected payment service to process transactions, and switching between payment methods should be done through configuration without changing the Java code. 
+Input:
+PaymentService.java
+package com.example.payment;
+
+public interface PaymentService {
+    void pay(double amount);
+}
+
+CreditCardPayment.java
+package com.example.payment;
+
+public class CreditCardPayment implements PaymentService {
+    public void pay(double amount) {
+        System.out.println("Paid " + amount + " using Credit Card");
+    }
+}
+
+DebitCardPayment.java
+package com.example.payment;
+
+public class DebitCardPayment implements PaymentService {
+    public void pay(double amount) {
+        System.out.println("Paid " + amount + " using Debit Card");
+    }
+}
+
+UPIPayment.java
+package com.example.payment;
+
+public class UPIPayment implements PaymentService {
+    public void pay(double amount) {
+        System.out.println("Paid " + amount + " using UPI");
+    }
+}
+PaymentProcessor
+package com.example.payment;
+
+public class PaymentProcessor {
+
+    private PaymentService paymentService;
+
+    public void setPaymentService(PaymentService paymentService) {
+        this.paymentService = paymentService;
+    }
+
+    public void processPayment(double amount) {
+        paymentService.pay(amount);
+    }
+}
+
+MainApp.java
+package com.example.payment;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class MainApp {
+    public static void main(String[] args) {
+        ApplicationContext context =
+                new ClassPathXmlApplicationContext("beans.xml");
+
+        PaymentProcessor processor =
+                (PaymentProcessor) context.getBean("paymentProcessor");
+
+        processor.processPayment(5000);
+    }
+}
+Bean.xml
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- Change this class to switch payment -->
+    <bean id="paymentService" class="com.example.payment.UPIPayment"/>
+
+    <bean id="paymentProcessor" class="com.example.payment.PaymentProcessor">
+        <property name="paymentService" ref="paymentService"/>
+    </bean>
+
+</beans>
+
+
+
+9.2.Notification System In many real-world applications such as banking systems, 
+e-commerce platforms, and social media applications, users receive notifications 
+through different channels like email, SMS, or mobile alerts. The system should be 
+flexible enough to support multiple notification methods and allow easy switching 
+between them without altering the main application logic. Design a Spring-based 
+application that uses Dependency Injection to send notifications through different 
+services. Create a common notification interface and multiple implementations such 
+as email and SMS. The main service class should rely on the injected notification 
+service, and the type of notification should be configurable externally using Spring 
+configuration.
+
+Input:
+EmailService.java
+package com.example.notification;
+
+public class EmailService implements NotificationService {
+    @Override
+    public void sendNotification(String message) {
+        System.out.println("Email Sent: " + message);
+    }
+}
+
+NotificationManager.java
+package com.example.notification;
+
+public class NotificationManager {
+    private NotificationService notificationService;
+
+    public void setNotificationService(NotificationService notificationService) {
+        this.notificationService = notificationService;
+    }
+
+    public void notifyUser(String message) {
+        notificationService.sendNotification(message);
+    }
+}
+NotificationService.java
+package com.example.notification;
+
+public interface NotificationService {
+    void sendNotification(String message);
+}
+
+SMSService.java
+package com.example.notification;
+
+public class SMSService implements NotificationService {
+    @Override
+    public void sendNotification(String message) {
+        System.out.println("SMS Sent: " + message);
+    }
+}
+
+Test.java
+package com.example.notification;
+78
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class Test {
+    public static void main(String[] args) {
+        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+        NotificationManager manager = (NotificationManager) context.getBean("notificationManager");
+        manager.notifyUser("Order Successfully!");
+    }
+}
+applicationContext.xml
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="notificationService" class="com.example.notification.EmailService"/>
+    <bean id="notificationManager" class="com.example.notification.NotificationManager">
+        <property name="notificationService" ref="notificationService"/>
+    </bean>
+</beans>
+
+
+
+10.1. Student Record Management REST API:Develop a REST API using Spring Boot and the @RestController annotation to manage student records in a college system. The application should provide endpoints to add new students, retrieve student details, update student information, and delete student records. Each student record should contain attributes such as student ID, name. 
+Input:
+Student.java
+package com.shriyash.mca.model;
+public class student {
+private int id;
+private String name;
+	public student() {
+	}
+	public student(int id, String name) {
+		this.id = id;
+		this.name = name;
+	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+
+}
+
+StudentController.java
+package com.shriyash.mca.controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestBody;
+import com.shriyash.mca.model.student;
+@RestController
+@RequestMapping
+public class studentController {
+	student std = new student(1,"Shriyash");
+	@GetMapping("/student")
+	public student getStudent() {
+		return std;
+	}
+	@PostMapping("/student")
+	public String addStudent(@RequestBody student s) {
+		std = s;
+		return "Data Addes to Student";
+	}
+}
+
+
+
+
+
+10.2. Library Book Management REST API:Create a REST API using Spring Boot with @RestController to manage books in a library. The API should allow users to add new books, view the book,update book details, and remove books from the system. Each book should include fields such as book ID, title, author
+Input:
+Book.java
+package com.shriyash.mca.model;
+
+public class Book {
+    private int bookId;
+    private String title;
+    private String author;
+    public Book() {
+    }
+    public Book(int bookId, String title, String author) {
+        this.bookId = bookId;
+        this.title = title;
+        this.author = author;
+    }
+    public int getBookId() {
+        return bookId;
+    }
+    public void setBookId(int bookId) {
+        this.bookId = bookId;
+    }
+    public String getTitle() {
+        return title;
+    }
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    public String getAuthor() {
+        return author;
+    }
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+}
+
+
+
+
+11.1: Exception Handling in Student REST APIEnhance an existing Spring Boot Student REST API by implementing global exception handling. Create a custom exception named StudentNotFoundException that is thrown when a student record with a given ID is not found. Use @ControllerAdvice and @ExceptionHandler to handle the exception globally and return an appropriate HTTP status code with an error message. Test the API using Postman for valid and invalid student IDs.
+Input:
+Student.java
+package com.shriyash.mca.model;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
+public class Student {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    private String name;
+    private String course;
+
+    public Student() {
+    }
+
+    public Student(String name, String course) {
+        this.name = name;
+        this.course = course;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getCourse() {
+        return course;
+    }
+
+    public void setCourse(String course) {
+        this.course = course;
+    }
+}
+
+StudentRepository.java
+package com.shriyash.mca.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.shriyash.mca.model.Student;
+
+@Repository
+public interface StudentRepository extends JpaRepository<Student, Long> {
+}
+
+StudentNotFoundException.java
+package com.shriyash.mca.exception;
+
+public class StudentNotFoundException extends RuntimeException {
+    
+    public StudentNotFoundException(Long id) {
+        super("Student record with ID " + id + " not found.");
+    }
+}
+studentControoler.java
+package com.shriyash.mca.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.shriyash.mca.exception.StudentNotFoundException;
+import com.shriyash.mca.model.Student;
+import com.shriyash.mca.repository.StudentRepository;
+
+@RestController
+@RequestMapping("/api/students")
+public class StudentController {
+
+    @Autowired
+    private StudentRepository studentRepository;
+
+    @PostMapping
+    public ResponseEntity<Student> createStudent(@RequestBody Student student) {
+        Student savedStudent = studentRepository.save(student);
+        return new ResponseEntity<>(savedStudent, HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public List<Student> getAllStudents() {
+        return studentRepository.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Student> getStudentById(@PathVariable Long id) {
+        Student student = studentRepository.findById(id)
+                .orElseThrow(() -> new StudentNotFoundException(id));
+        return ResponseEntity.ok(student);
+    }
+}
+
+
+
+
+
+
+
+
+BookController.java
+package com.shriyash.mca.controller;
+import org.springframework.web.bind.annotation.*;
+import com.shriyash.mca.model.Book;
+import java.util.ArrayList;
+import java.util.List;
+@RestController
+@RequestMapping("/books")
+public class BookController {
+    private List<Book> books = new ArrayList<>();
+    public BookController() {
+        books.add(new Book(1, "The Great Gatsby", "F. Scott Fitzgerald"));
+    }
+    @GetMapping
+    public List<Book> getAllBooks() {
+        return books;
+    }
+    @PostMapping
+    public String addBook(@RequestBody Book book) {
+        books.add(book);
+        return "Book added successfully";
+    }
+}
+
+
+
+
+11.2: Transaction Management in Bank Account APIDevelop a simple REST API using Spring Boot to simulate money transfer between two bank accounts. Create methods to debit one account and credit another account within a service method annotated with @Transactional. If an error occurs during the transfer process, ensure that all operations are rolled back. Test the transaction behavior by simulating a failure during the transfer and verify that account balances remain unchanged.
+
+Input:
+AccountService.java
+package com.shriyash.mca.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.shriyash.mca.model.Account;
+import com.shriyash.mca.repository.AccountRepository;
+
+@Service
+public class AccountService {
+
+    @Autowired
+    private AccountRepository accountRepository;
+
+    public Account createAccount(Account account) {
+        return accountRepository.save(account);
+    }
+
+    public Account getAccount(Long id) {
+        return accountRepository.findById(id).orElseThrow(() -> new RuntimeException("Account not found"));
+    }
+
+    @Transactional
+    public void transferMoney(Long fromAccountId, Long toAccountId, Double amount, boolean simulateError) {
+        Account fromAccount = accountRepository.findById(fromAccountId)
+                .orElseThrow(() -> new RuntimeException("Source account not found"));
+        
+        Account toAccount = accountRepository.findById(toAccountId)
+                .orElseThrow(() -> new RuntimeException("Destination account not found"));
+
+        if (fromAccount.getBalance() < amount) {
+            throw new RuntimeException("Insufficient balance");
+        }
+
+        fromAccount.setBalance(fromAccount.getBalance() - amount);
+        accountRepository.save(fromAccount);
+
+        if (simulateError) {
+            throw new RuntimeException("Simulated error during money transfer! Transaction should rollback.");
+        }
+
+        toAccount.setBalance(toAccount.getBalance() + amount);
+        accountRepository.save(toAccount);
+    }
+}
+AccountRepository.java
+package com.shriyash.mca.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.shriyash.mca.model.Account;
+
+@Repository
+public interface AccountRepository extends JpaRepository<Account, Long> {
+}
+Account.java
+package com.shriyash.mca.model;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+@Entity
+public class Account {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    private String accountHolderName;
+    private Double balance;
+
+    public Account() {
+    }
+
+    public Account(String accountHolderName, Double balance) {
+        this.accountHolderName = accountHolderName;
+        this.balance = balance;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getAccountHolderName() {
+        return accountHolderName;
+    }
+
+    public void setAccountHolderName(String accountHolderName) {
+        this.accountHolderName = accountHolderName;
+    }
+
+    public Double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
+    }
+}
+GlobalExceptionandler.java
+package com.shriyash.mca.exception;
+
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+@ControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(StudentNotFoundException.class)
+    public ResponseEntity<Object> handleStudentNotFoundException(StudentNotFoundException ex) {
+        Map<String, Object> body = new HashMap<>();
+        body.put("timestamp", LocalDateTime.now());
+        body.put("status", HttpStatus.NOT_FOUND.value());
+        body.put("error", "Not Found");
+        body.put("message", ex.getMessage());
+
+        return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    }
+}
+
+AccountController.java
+package com.shriyash.mca.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.shriyash.mca.model.Account;
+import com.shriyash.mca.service.AccountService;
+
+@RestController
+@RequestMapping("/api/accounts")
+public class AccountController {
+
+    @Autowired
+    private AccountService accountService;
+
+    @PostMapping
+    public ResponseEntity<Account> createAccount(@RequestBody Account account) {
+        return ResponseEntity.ok(accountService.createAccount(account));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Account> getAccount(@PathVariable Long id) {
+        return ResponseEntity.ok(accountService.getAccount(id));
+    }
+
+    @PostMapping("/transfer")
+    public ResponseEntity<String> transferMoney(
+            @RequestParam Long fromAccountId,
+            @RequestParam Long toAccountId,
+            @RequestParam Double amount,
+            @RequestParam(defaultValue = "false") boolean simulateError) {
+        
+        accountService.transferMoney(fromAccountId, toAccountId, amount, simulateError);
+        return ResponseEntity.ok("Transfer successful");
+    }
+}
+
+
+
+
+
+Practical 13
+
+Aim
+To develop a Student Management System using ReactJS and Spring Boot that allows adding and viewing MCA student records through RESTful APIs and database connectivity.
+
+
+
+
+McaApplication.java
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class McaApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(McaApplication.class, args);
+    }
+}
+
+McaStudentController.java
+package com.saloni.mca.controller;
+
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import com.saloni.mca.model.McaStudent;
+import com.saloni.mca.repository.StudentRepository;
+
+@RestController
+@RequestMapping("/McaStudents")
+@CrossOrigin(origins = "http://localhost:3000")
+public class McaStudentController {
+
+    @Autowired
+    StudentRepository repo;
+
+    @PostMapping
+    public String addStudent(@RequestBody McaStudent s) {
+        repo.save(s);
+        return "Success";
+    }
+
+    @GetMapping
+    public List<McaStudent> viewAll() {
+        return repo.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public McaStudent viewById(@PathVariable int id) {
+        return repo.findById(id).orElse(null);
+    }
+}
+
+McaStudent.java
+package com.saloni.mca.model;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+
+@Entity
+public class McaStudent {
+    @Id
+    private int id;
+    private String name;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}
+
+StudentRepository.java
+package com.saloni.mca.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import com.saloni.mca.model.McaStudent;
+
+public interface StudentRepository extends JpaRepository<McaStudent, Integer> {
+}
+
+
+ReactJS
+app.js
+import React, { useEffect, useState } from "react";
+import "./App.css";
+
+function App() {
+  const [students, setStudents] = useState([]);
+  const [id, setId] = useState("");
+  const [name, setName] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("http://localhost:8080/McaStudents")
+      .then((res) => res.json())
+      .then((data) => {
+        setStudents(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Error fetching students:", err);
+        setLoading(false);
+      });
+  }, []);
+
+  const addStudent = () => {
+    if (!id || !name) {
+      alert("Please enter both ID and Name");
+      return;
+    }
+
+    fetch("http://localhost:8080/McaStudents", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: Number(id),
+        name: name,
+      }),
+    })
+      .then((res) => res.text())
+      .then((msg) => {
+        alert(msg);
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.error("Error adding student:", err);
+        alert("Failed to add student");
+      });
+  };
+
+  return (
+    <div className="container">
+      <div className="glass-card">
+        <header>
+          <h1>MCA Students</h1>
+          <p className="subtitle">Management System</p>
+        </header>
+
+        <div className="form-section">
+          <div className="input-group">
+            <input
+              type="number"
+              placeholder="Student ID"
+              value={id}
+              onChange={(e) => setId(e.target.value)}
+              id="student-id"
+            />
+            <label htmlFor="student-id">ID</label>
+          </div>
+
+          <div className="input-group">
+            <input
+              type="text"
+              placeholder="Student Name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              id="student-name"
+            />
+            <label htmlFor="student-name">Name</label>
+          </div>
+
+          <button className="add-btn" onClick={addStudent}>
+            <span>Add Student</span>
+          </button>
+        </div>
+
+        <hr className="divider" />
+
+        <div className="list-section">
+          <h2>Student Directory</h2>
+          {loading ? (
+            <div className="loader">Loading...</div>
+          ) : students.length > 0 ? (
+            <ul className="student-list">
+              {students.map((s) => (
+                <li key={s.id} className="student-item">
+                  <span className="sid">#{s.id}</span>
+                  <span className="sname">{s.name}</span>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="empty-msg">No students found.</p>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default App;
+
+
+
+Practical 14 
+Aim
+To develop a simple Bank Management System using ReactJS and Spring Boot that performs account creation and displays account details using REST APIs and React state management.
+
+
+
+Input:
+AccountController.java
+package com.shriyash.mca.controller;
+
+import com.shriyash.mca.entity.Account;
+import com.shriyash.mca.repository.AccountRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/bank")
+@CrossOrigin(origins = "http://localhost:3000")
+public class AccountController {
+
+    @Autowired
+    private AccountRepository accountRepository;
+
+    @GetMapping("/show")
+    public List<Account> getAllAccounts() {
+        return accountRepository.findAll();
+    }
+
+    @PostMapping("/create")
+    public Account createAccount(@RequestBody Account account) {
+        return accountRepository.save(account);
+    }
+}
+
+Account.java
+package com.shriyash.mca.entity;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "accounts")
+public class Account {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String name;
+    private Double balance;
+
+    public Account() {}
+
+    public Account(String name, Double balance) {
+        this.name = name;
+        this.balance = balance;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
+    }
+}
+
+AccountRepositor.java
+package com.shriyash.mca.repository;
+
+import com.shriyash.mca.entity.Account;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface AccountRepository extends JpaRepository<Account, Long> {
+}
+
+ReactJS
+App.js
+import { useState } from "react";
+import axios from "axios";
+
+function App() {
+  const [accounts, setAccounts] = useState([]);
+  const [showAccounts, setShowAccounts] = useState(false);
+  const [name, setName] = useState("");
+  const [balance, setBalance] = useState("");
+
+  // View Accounts
+  const loadAccounts = async () => {
+    try {
+      const response = await axios.get("http://localhost:8082/bank/show");
+      setAccounts(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // Create Account
+  const createAccount = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post("http://localhost:8082/bank/create", {
+        name: name,
+        balance: balance
+      });
+      alert("Account Created Successfully");
+      setName("");
+      setBalance("");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return (
+    <div style={{ padding: "20px" }}>
+      <h1>Bank Management System</h1>
+      {/* Create Account Form */}
+      <h2>Create Account</h2>
+      <form onSubmit={createAccount}>
+        <input
+          type="text"
+          placeholder="Enter Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <br /><br />
+        <input
+          type="number"
+          placeholder="Enter Balance"
+          value={balance}
+          onChange={(e) => setBalance(e.target.value)}
+        />
+        <br /><br />
+        <button type="submit">Create Account</button>
+      </form>
+      <hr />
+      {/* View Accounts */}
+      <button
+        onClick={() => {
+          loadAccounts();
+          setShowAccounts(true);
+        }}
+      >
+        View All Accounts
+      </button>
+      <button
+        onClick={() => setShowAccounts(false)}
+        style={{ marginLeft: "10px" }}
+      >
+        Minimize Accounts
+      </button>
+      <br /><br />
+      {/* Display Accounts */}
+      {showAccounts &&
+        accounts.map((acc) => (
+          <div
+            key={acc.id}
+            style={{
+              border: "1px solid black",
+              padding: "10px",
+              marginBottom: "10px"
+            }}
+          >
+            <h3>{acc.name}</h3>
+            <p>ID: {acc.id}</p>
+            <p>Balance: {acc.balance}</p>
+          </div>
+        ))}
+    </div>
+  );
+}
+
+export default App;
+
+
+
+
+
+
