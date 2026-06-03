@@ -1,2 +1,341 @@
-<h1>Donwload Load</h1>
-<a href="./prac.zip">Download</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Java Practicals (WDJ)</title>
+    <style>
+        :root {
+            --primary: #4F46E5;
+            --primary-hover: #4338CA;
+            --bg-color: #F3F4F6;
+            --card-bg: #FFFFFF;
+            --text-main: #1F2937;
+            --text-muted: #6B7280;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .unit-section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .unit-title {
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--bg-color);
+            padding-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-main);
+        }
+
+        .question-card {
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            border: 1px solid #E5E7EB;
+            border-radius: 8px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .question-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .question-text {
+            font-weight: 500;
+            margin: 0;
+            flex: 1;
+        }
+
+        .sub-questions {
+            margin-top: 1rem;
+            padding-left: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: background-color 0.2s;
+            white-space: nowrap;
+        }
+
+        .download-btn:hover {
+            background-color: var(--primary-hover);
+        }
+
+        .download-btn svg {
+            width: 1.25rem;
+            height: 1.25rem;
+            margin-right: 0.5rem;
+        }
+
+        @media (max-width: 640px) {
+            .question-header {
+                flex-direction: column;
+            }
+            .download-btn {
+                align-self: flex-start;
+                margin-top: 1rem;
+            }
+            body {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Java Practicals Download Center</h1>
+            <p style="color: var(--text-muted); font-size: 1.1rem;">Unit 1 & Unit 2 Assignments</p>
+        </header>
+
+        <!-- UNIT 1 -->
+        <section class="unit-section">
+            <h2 class="unit-title">Unit-1: Java Database Connectivity</h2>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <p class="question-text"><strong>Q1)</strong> Write a program to create a menu driven program using Statements</p>
+                    <a href="./U1Q1.zip" class="download-btn">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        Download U1Q1
+                    </a>
+                </div>
+                <div class="sub-questions">
+                    A) Insert record<br>
+                    B) Updated record<br>
+                    C) Delete record<br>
+                    D) Display record<br>
+                    E) Count the number of records<br>
+                    F) Search by id, name
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <p class="question-text"><strong>Q2)</strong> Write a program to create a menu driven program using Prepared statements</p>
+                    <a href="./U1Q2.zip" class="download-btn">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        Download U1Q2
+                    </a>
+                </div>
+                <div class="sub-questions">
+                    A) Insert record<br>
+                    B) Updated record<br>
+                    C) Delete record<br>
+                    D) Display record<br>
+                    E) Count the number of records<br>
+                    F) Search by id, name
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <p class="question-text"><strong>Q3)</strong> Write a program to demonstrate the callable statements</p>
+                    <a href="./U1Q3.zip" class="download-btn">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        Download U1Q3
+                    </a>
+                </div>
+                <div class="sub-questions">
+                    A) In<br>
+                    B) Out<br>
+                    C) In-Out
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <p class="question-text"><strong>Q4)</strong> Write a program to demonstrate the resultSet readonly and Updateable</p>
+                    <a href="./U1Q4.zip" class="download-btn">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        Download U1Q4
+                    </a>
+                </div>
+                <div class="sub-questions">
+                    A) Insert record<br>
+                    B) Updated record<br>
+                    C) Delete record<br>
+                    D) Display record<br>
+                    E) Count the number of records<br>
+                    F) Search by id, name
+                </div>
+            </div>
+        </section>
+
+        <!-- UNIT 2 -->
+        <section class="unit-section">
+            <h2 class="unit-title">Unit-2: Java Servlets</h2>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <p class="question-text"><strong>Q1)</strong> Write display date, time and number of requests (count) using Generic and HTTP servlet life cycle.</p>
+                    <a href="./U2Q1Servlet.zip" class="download-btn">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        Download U2Q1
+                    </a>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <p class="question-text"><strong>Q2)</strong> Write a program to show servlet config and context with student information</p>
+                    <a href="./U2Q2.zip" class="download-btn">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        Download U2Q2
+                    </a>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <p class="question-text"><strong>Q3)</strong> Write a program to add 2 numbers using get parameter.</p>
+                    <a href="./U2Q3.zip" class="download-btn">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        Download U2Q3
+                    </a>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <p class="question-text"><strong>Q4)</strong> Write a program to make a calculator using doGet method.</p>
+                    <a href="./U2Q4.zip" class="download-btn">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        Download U2Q4
+                    </a>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <p class="question-text"><strong>Q5)</strong> Write a program to create login page email and password using doGet() and redirect page to welcome page containing Welcome username entered.</p>
+                    <a href="./U2Q5.zip" class="download-btn">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        Download U2Q5
+                    </a>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <p class="question-text"><strong>Q6)</strong> Write a program to show HTTP request and HTTP response methods.</p>
+                    <a href="./U2Q6.zip" class="download-btn">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        Download U2Q6
+                    </a>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <p class="question-text"><strong>Q7)</strong> Write a program to print 1 to 10 lucky number from 1 to 100 random number.</p>
+                    <a href="./U2Q7.zip" class="download-btn">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        Download U2Q7
+                    </a>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <p class="question-text"><strong>Q8)</strong> Write a program to create a login page to store information using cookie.</p>
+                    <a href="./U2Q8.zip" class="download-btn">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        Download U2Q8
+                    </a>
+                </div>
+                <div class="sub-questions">
+                    A) Login form page accept username and password with submit button<br>
+                    B) Page 2 (Cookie correct and an option to view cookie)<br>
+                    C) Page 3 (Stored cookie information & Welcome message for the username)
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <p class="question-text"><strong>Q9)</strong> Write a program to create a login form using request dispatcher method like include and forward to print appropriate messages like Welcome username, if login id or password is incorrect, redirect to login page with appropriate error message.</p>
+                    <a href="./U2Q9LoginForm.zip" class="download-btn">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        Download U2Q9
+                    </a>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <p class="question-text"><strong>Q10)</strong> Write a program to create a login form using send redirect method to print appropriate messages like Welcome username, if login id or password is incorrect, redirect to login page with appropriate error message.</p>
+                    <a href="./U2Q10.zip" class="download-btn">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        Download U2Q10
+                    </a>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <p class="question-text"><strong>Q11)</strong> Write a program to create login form using request dispatcher method like include and forward & using database to print appropriate messages like Welcome username, if login id or password is incorrect redirect to login page with appropriate error message.</p>
+                    <a href="./U2Q11.zip" class="download-btn">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        Download U2Q11
+                    </a>
+                </div>
+            </div>
+
+            <div class="question-card">
+                <div class="question-header">
+                    <p class="question-text"><strong>Q12)</strong> Write a program to create a login form & print message using HTTP session interface.</p>
+                    <a href="./U2Q12.zip" class="download-btn">
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+                        Download U2Q12
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
