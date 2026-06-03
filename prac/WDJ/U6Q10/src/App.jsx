@@ -23,7 +23,7 @@ function App() {
 
   return (
     <div>
-      <h1>Q10: To-Do List</h1>
+      <h1>To-Do List</h1>
       <div>
         <input 
           type="text" 
@@ -48,3 +48,4 @@ function App() {
   );
 }
 export default App;
+

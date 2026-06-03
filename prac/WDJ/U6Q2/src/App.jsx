@@ -13,7 +13,7 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h1>Q2: State in Class Component</h1>
+        <h1>State in Class Component</h1>
         <h2>Count: {this.state.count}</h2>
         <button onClick={this.increment}>Increment</button>
       </div>
@@ -21,3 +21,4 @@ class App extends Component {
   }
 }
 export default App;
+

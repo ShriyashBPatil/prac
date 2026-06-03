@@ -14,10 +14,11 @@ function StudentInfo(props) {
 function App() {
   return (
     <div>
-      <h1>Q3: Props in React</h1>
+      <h1>Props in React</h1>
       <StudentInfo name="John Doe" roll="101" course="B.Sc IT" />
       <StudentInfo name="Jane Smith" roll="102" course="BCA" />
     </div>
   );
 }
 export default App;
+

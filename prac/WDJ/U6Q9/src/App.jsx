@@ -10,7 +10,7 @@ function App() {
 
   return (
     <div>
-      <h1>Q9: Search Filter</h1>
+      <h1>Search Filter</h1>
       <input 
         type="text" 
         placeholder="Search frameworks..." 
@@ -28,3 +28,4 @@ function App() {
   );
 }
 export default App;
+

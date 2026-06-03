@@ -5,7 +5,7 @@ function App() {
 
   return (
     <div>
-      <h1>Q7: Conditional Rendering</h1>
+      <h1>Conditional Rendering</h1>
       {isLoggedIn ? (
         <div>
           <h2>Welcome back, User!</h2>
@@ -21,3 +21,4 @@ function App() {
   );
 }
 export default App;
+

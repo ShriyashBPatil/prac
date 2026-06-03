@@ -23,7 +23,7 @@ function App() {
 
   return (
     <div>
-      <h1>Q5: Forms with useState & useEffect</h1>
+      <h1>Forms with useState & useEffect</h1>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Name: </label>
@@ -42,3 +42,4 @@ function App() {
   );
 }
 export default App;
+

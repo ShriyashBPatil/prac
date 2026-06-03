@@ -7,9 +7,10 @@ function Greeting() {
 function App() {
   return (
     <div>
-      <h1>Q1: Components and JSX</h1>
+      <h1>Components and JSX</h1>
       <Greeting />
     </div>
   );
 }
 export default App;
+

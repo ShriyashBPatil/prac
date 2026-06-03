@@ -5,7 +5,7 @@ function App() {
 
   return (
     <div>
-      <h1>Q6: Lists using Array Mapping</h1>
+      <h1>Lists using Array Mapping</h1>
       <ul>
         {fruits.map((fruit, index) => (
           <li key={index}>{fruit}</li>
@@ -15,3 +15,4 @@ function App() {
   );
 }
 export default App;
+

@@ -19,7 +19,7 @@ function App() {
 
   return (
     <div>
-      <h1>Q8: REST API Integration</h1>
+      <h1>REST API Integration</h1>
       {loading ? (
         <p>Loading users...</p>
       ) : (
@@ -35,3 +35,4 @@ function App() {
   );
 }
 export default App;
+

@@ -13,7 +13,7 @@ function App() {
 
   return (
     <div>
-      <h1>Q4: Event Handling</h1>
+      <h1>Event Handling</h1>
       <button onClick={handleClick}>Click Me</button>
       <div onMouseOver={handleMouseOver}>
         <br/>Hover over me!<br/>
@@ -23,3 +23,4 @@ function App() {
   );
 }
 export default App;
+
