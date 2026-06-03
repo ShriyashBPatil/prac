@@ -22,29 +22,25 @@ function App() {
   };
 
   return (
-    <div style={{ padding: '20px', maxWidth: '400px' }}>
+    <div>
       <h1>Q10: To-Do List</h1>
-      <div style={{ display: 'flex', gap: '10px', marginBottom: '20px' }}>
+      <div>
         <input 
           type="text" 
           value={taskText} 
           onChange={(e) => setTaskText(e.target.value)} 
           placeholder="New task..."
-          style={{ flex: 1, padding: '8px' }}
         />
-        <button onClick={addTask} style={{ padding: '8px 15px' }}>Add</button>
+        <button onClick={addTask}>Add</button>
       </div>
       
-      <ul style={{ listStyle: 'none', padding: 0 }}>
+      <ul>
         {tasks.map(task => (
-          <li key={task.id} style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px', padding: '10px', border: '1px solid #ddd' }}>
-            <span 
-              onClick={() => toggleTask(task.id)}
-              style={{ textDecoration: task.completed ? 'line-through' : 'none', cursor: 'pointer', flex: 1 }}
-            >
-              {task.text}
+          <li key={task.id}>
+            <span onClick={() => toggleTask(task.id)}>
+              {task.completed ? "[X]" : "[ ]"} {task.text}
             </span>
-            <button onClick={() => deleteTask(task.id)} style={{ color: 'red', border: 'none', background: 'none', cursor: 'pointer' }}>X</button>
+            <button onClick={() => deleteTask(task.id)}>Delete</button>
           </li>
         ))}
       </ul>

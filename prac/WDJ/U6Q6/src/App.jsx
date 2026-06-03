@@ -4,11 +4,11 @@ function App() {
   const fruits = ['Apple', 'Banana', 'Cherry', 'Mango', 'Orange'];
 
   return (
-    <div style={{ padding: '20px' }}>
+    <div>
       <h1>Q6: Lists using Array Mapping</h1>
       <ul>
         {fruits.map((fruit, index) => (
-          <li key={index} style={{ fontSize: '18px', margin: '5px 0' }}>{fruit}</li>
+          <li key={index}>{fruit}</li>
         ))}
       </ul>
     </div>

@@ -22,20 +22,20 @@ function App() {
   };
 
   return (
-    <div style={{ padding: '20px' }}>
+    <div>
       <h1>Q5: Forms with useState & useEffect</h1>
       <form onSubmit={handleSubmit}>
-        <div style={{ marginBottom: '10px' }}>
+        <div>
           <label>Name: </label>
           <input type="text" name="name" value={formData.name} onChange={handleChange} required />
         </div>
-        <div style={{ marginBottom: '10px' }}>
+        <div>
           <label>Email: </label>
           <input type="email" name="email" value={formData.email} onChange={handleChange} required />
         </div>
         <button type="submit">Submit</button>
       </form>
-      <div style={{ marginTop: '20px' }}>
+      <div>
         <strong>Current Input:</strong> {formData.name} ({formData.email})
       </div>
     </div>

@@ -6,7 +6,7 @@ function Greeting() {
 
 function App() {
   return (
-    <div style={{ padding: '20px' }}>
+    <div>
       <h1>Q1: Components and JSX</h1>
       <Greeting />
     </div>

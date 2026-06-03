@@ -12,7 +12,7 @@ class App extends Component {
 
   render() {
     return (
-      <div style={{ padding: '20px' }}>
+      <div>
         <h1>Q2: State in Class Component</h1>
         <h2>Count: {this.state.count}</h2>
         <button onClick={this.increment}>Increment</button>

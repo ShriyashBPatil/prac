@@ -18,14 +18,14 @@ function App() {
   }, []);
 
   return (
-    <div style={{ padding: '20px' }}>
+    <div>
       <h1>Q8: REST API Integration</h1>
       {loading ? (
         <p>Loading users...</p>
       ) : (
         <ul>
           {users.slice(0, 5).map(user => (
-            <li key={user.id} style={{ margin: '10px 0' }}>
+            <li key={user.id}>
               <strong>{user.name}</strong> - {user.email}
             </li>
           ))}
