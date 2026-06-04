@@ -1,0 +1,2592 @@
+====================================================================
+====================================================================
+        PYTHON PRACTICAL PROGRAMS - ALL TOPICS (01 to 12)
+====================================================================
+====================================================================
+
+
+
+
+====================================================================
+  TOPIC 01: Programs based on Python Fundamentals
+  (Variables, Data Types, Decision Making, Loops)        [CO 1]
+====================================================================
+
+
+--------------------------------------------------------------------
+Program 1a: Calculate Simple Interest using principal, rate, and time
+--------------------------------------------------------------------
+
+principal = float(input("Enter Principal Amount: "))
+rate = float(input("Enter Rate of Interest: "))
+time = float(input("Enter Time (in years): "))
+
+simple_interest = (principal * rate * time) / 100
+
+print(f"\nPrincipal: {principal}")
+print(f"Rate: {rate}%")
+print(f"Time: {time} years")
+print(f"Simple Interest: {simple_interest}")
+print(f"Total Amount: {principal + simple_interest}")
+
+
+--------------------------------------------------------------------
+Program 1b: Check whether a given number is even or odd
+--------------------------------------------------------------------
+
+num = int(input("Enter a number: "))
+
+if num % 2 == 0:
+    print(f"{num} is Even")
+else:
+    print(f"{num} is Odd")
+
+
+--------------------------------------------------------------------
+Program 1c: Find the largest among three numbers using decision making
+--------------------------------------------------------------------
+
+a = float(input("Enter first number: "))
+b = float(input("Enter second number: "))
+c = float(input("Enter third number: "))
+
+if a >= b and a >= c:
+    largest = a
+elif b >= a and b >= c:
+    largest = b
+else:
+    largest = c
+
+print(f"\nThe largest among {a}, {b}, and {c} is: {largest}")
+
+
+--------------------------------------------------------------------
+Program 1d: Print numbers from 1 to N using a for loop
+--------------------------------------------------------------------
+
+n = int(input("Enter the value of N: "))
+
+print(f"\nNumbers from 1 to {n}:")
+for i in range(1, n + 1):
+    print(i, end=" ")
+print()
+
+
+--------------------------------------------------------------------
+Program 1e: Calculate the factorial of a given number using a loop
+--------------------------------------------------------------------
+
+num = int(input("Enter a number: "))
+
+factorial = 1
+for i in range(1, num + 1):
+    factorial *= i
+
+print(f"\nFactorial of {num} is: {factorial}")
+
+
+--------------------------------------------------------------------
+Program 1f: Find the sum of digits of a given number using while loop
+--------------------------------------------------------------------
+
+num = int(input("Enter a number: "))
+
+temp = num
+sum_digits = 0
+
+while temp > 0:
+    digit = temp % 10
+    sum_digits += digit
+    temp //= 10
+
+print(f"\nSum of digits of {num} is: {sum_digits}")
+
+
+--------------------------------------------------------------------
+Program 1g: Check whether a given number is prime or not
+--------------------------------------------------------------------
+
+num = int(input("Enter a number: "))
+
+if num <= 1:
+    print(f"{num} is not a Prime number")
+else:
+    is_prime = True
+    for i in range(2, int(num ** 0.5) + 1):
+        if num % i == 0:
+            is_prime = False
+            break
+
+    if is_prime:
+        print(f"{num} is a Prime number")
+    else:
+        print(f"{num} is not a Prime number")
+
+
+--------------------------------------------------------------------
+Program 1h: Display the multiplication table of a given number
+--------------------------------------------------------------------
+
+num = int(input("Enter a number: "))
+
+print(f"\nMultiplication Table of {num}:")
+print("-" * 20)
+for i in range(1, 11):
+    print(f"{num} x {i} = {num * i}")
+
+
+
+
+====================================================================
+  TOPIC 02: Programs based on Python Data Structures
+  (List, Tuple, Set, Dictionary)                         [CO 1]
+====================================================================
+
+
+--------------------------------------------------------------------
+Program 2a: Perform list operations; find maximum and minimum values
+--------------------------------------------------------------------
+
+my_list = [45, 12, 78, 34, 56, 89, 23, 67]
+print(f"Original List: {my_list}")
+
+# List Operations
+my_list.append(100)
+print(f"After append(100): {my_list}")
+
+my_list.insert(2, 50)
+print(f"After insert(2, 50): {my_list}")
+
+my_list.remove(34)
+print(f"After remove(34): {my_list}")
+
+my_list.sort()
+print(f"After sort(): {my_list}")
+
+my_list.reverse()
+print(f"After reverse(): {my_list}")
+
+# Maximum and Minimum
+print(f"\nMaximum value: {max(my_list)}")
+print(f"Minimum value: {min(my_list)}")
+print(f"Sum of list: {sum(my_list)}")
+print(f"Length of list: {len(my_list)}")
+
+
+--------------------------------------------------------------------
+Program 2b: Create a tuple and display its elements
+--------------------------------------------------------------------
+
+my_tuple = (10, 20, 30, 40, 50)
+print(f"Tuple: {my_tuple}")
+print(f"Length: {len(my_tuple)}")
+
+# Accessing elements
+print(f"\nFirst element: {my_tuple[0]}")
+print(f"Last element: {my_tuple[-1]}")
+print(f"Slice (1:4): {my_tuple[1:4]}")
+
+# Displaying all elements using loop
+print("\nAll elements:")
+for index, element in enumerate(my_tuple):
+    print(f"  Index {index}: {element}")
+
+# Tuple operations
+print(f"\nMaximum: {max(my_tuple)}")
+print(f"Minimum: {min(my_tuple)}")
+print(f"Sum: {sum(my_tuple)}")
+print(f"Count of 30: {my_tuple.count(30)}")
+print(f"Index of 40: {my_tuple.index(40)}")
+
+
+--------------------------------------------------------------------
+Program 2c: Perform union and intersection of two sets
+--------------------------------------------------------------------
+
+set1 = {1, 2, 3, 4, 5}
+set2 = {4, 5, 6, 7, 8}
+
+print(f"Set 1: {set1}")
+print(f"Set 2: {set2}")
+
+# Union
+union_result = set1 | set2
+print(f"\nUnion (set1 | set2): {union_result}")
+
+# Intersection
+intersection_result = set1 & set2
+print(f"Intersection (set1 & set2): {intersection_result}")
+
+# Difference
+difference_result = set1 - set2
+print(f"Difference (set1 - set2): {difference_result}")
+
+# Symmetric Difference
+sym_diff = set1 ^ set2
+print(f"Symmetric Difference (set1 ^ set2): {sym_diff}")
+
+
+--------------------------------------------------------------------
+Program 2d: Create a dictionary and display keys and values
+--------------------------------------------------------------------
+
+student = {
+    "name": "Shriyash",
+    "roll_no": 101,
+    "branch": "Computer Science",
+    "marks": 85,
+    "city": "Mumbai"
+}
+
+print("Student Dictionary:")
+print(student)
+
+# Display keys
+print("\nKeys:")
+for key in student.keys():
+    print(f"  {key}")
+
+# Display values
+print("\nValues:")
+for value in student.values():
+    print(f"  {value}")
+
+# Display key-value pairs
+print("\nKey-Value Pairs:")
+for key, value in student.items():
+    print(f"  {key}: {value}")
+
+
+--------------------------------------------------------------------
+Program 2e: Create a list of squares of numbers from 1 to 5
+--------------------------------------------------------------------
+
+# Using list comprehension
+squares = [x ** 2 for x in range(1, 6)]
+
+print("Numbers and their Squares:")
+print("-" * 20)
+for i in range(1, 6):
+    print(f"  {i}^2 = {i ** 2}")
+
+print(f"\nList of squares: {squares}")
+
+
+--------------------------------------------------------------------
+Program 2f: Create a dictionary of numbers and their cubes
+--------------------------------------------------------------------
+
+# Using dictionary comprehension
+cubes = {x: x ** 3 for x in range(1, 6)}
+
+print("Dictionary of Numbers and their Cubes:")
+print("-" * 25)
+for number, cube in cubes.items():
+    print(f"  {number}^3 = {cube}")
+
+print(f"\nCubes Dictionary: {cubes}")
+
+
+--------------------------------------------------------------------
+Program 2g: Remove duplicate elements from a list using set
+--------------------------------------------------------------------
+
+my_list = [1, 2, 3, 2, 4, 5, 3, 6, 7, 5, 8, 1, 9, 4]
+print(f"Original List: {my_list}")
+print(f"Length (with duplicates): {len(my_list)}")
+
+# Remove duplicates using set
+unique_list = list(set(my_list))
+
+print(f"\nList after removing duplicates: {unique_list}")
+print(f"Length (without duplicates): {len(unique_list)}")
+print(f"Duplicates removed: {len(my_list) - len(unique_list)}")
+
+
+
+
+====================================================================
+  TOPIC 03: Programs based on Python Functions
+  (UDF, Lambda, *args/**kwargs)                          [CO 2]
+====================================================================
+
+
+--------------------------------------------------------------------
+Program 3a: Use a user-defined function to find the factorial
+--------------------------------------------------------------------
+
+def factorial(n):
+    """Calculate the factorial of a number."""
+    if n == 0 or n == 1:
+        return 1
+    result = 1
+    for i in range(2, n + 1):
+        result *= i
+    return result
+
+
+num = int(input("Enter a number: "))
+
+if num < 0:
+    print("Factorial is not defined for negative numbers.")
+else:
+    print(f"Factorial of {num} is: {factorial(num)}")
+
+
+--------------------------------------------------------------------
+Program 3b: Check whether a given number is prime using a function
+--------------------------------------------------------------------
+
+def is_prime(n):
+    """Check if a number is prime."""
+    if n <= 1:
+        return False
+    for i in range(2, int(n ** 0.5) + 1):
+        if n % i == 0:
+            return False
+    return True
+
+
+num = int(input("Enter a number: "))
+
+if is_prime(num):
+    print(f"{num} is a Prime number")
+else:
+    print(f"{num} is not a Prime number")
+
+
+--------------------------------------------------------------------
+Program 3c: Add two numbers using a function
+--------------------------------------------------------------------
+
+def add_numbers(a, b):
+    """Return the sum of two numbers."""
+    return a + b
+
+
+num1 = float(input("Enter first number: "))
+num2 = float(input("Enter second number: "))
+
+result = add_numbers(num1, num2)
+print(f"\nSum of {num1} and {num2} is: {result}")
+
+
+--------------------------------------------------------------------
+Program 3d: Use a lambda function to find the square of a number
+--------------------------------------------------------------------
+
+square = lambda x: x ** 2
+
+num = float(input("Enter a number: "))
+
+result = square(num)
+print(f"Square of {num} is: {result}")
+
+
+--------------------------------------------------------------------
+Program 3e: Filter even numbers from a list using lambda function
+--------------------------------------------------------------------
+
+numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+print(f"Original List: {numbers}")
+
+# Using filter() with lambda
+even_numbers = list(filter(lambda x: x % 2 == 0, numbers))
+
+print(f"Even Numbers: {even_numbers}")
+
+
+--------------------------------------------------------------------
+Program 3f: Calculate the sum of multiple numbers using *args
+--------------------------------------------------------------------
+
+def sum_numbers(*args):
+    """Calculate the sum of multiple numbers using *args."""
+    total = sum(args)
+    print(f"Numbers: {args}")
+    print(f"Sum: {total}")
+    return total
+
+
+print("Test 1:")
+sum_numbers(10, 20, 30)
+
+print("\nTest 2:")
+sum_numbers(5, 15, 25, 35, 45)
+
+print("\nTest 3:")
+sum_numbers(100, 200)
+
+
+--------------------------------------------------------------------
+Program 3g: Display student details using **kwargs
+--------------------------------------------------------------------
+
+def display_student(**kwargs):
+    """Display student details using **kwargs."""
+    print("Student Details:")
+    print("-" * 30)
+    for key, value in kwargs.items():
+        print(f"  {key.replace('_', ' ').title()}: {value}")
+    print()
+
+
+display_student(name="Shriyash", roll_no=101, branch="Computer Science", marks=85)
+
+display_student(name="Rahul", roll_no=102, branch="IT", marks=90, city="Pune")
+
+
+--------------------------------------------------------------------
+Program 3h: Return the sum and average of numbers using a function
+--------------------------------------------------------------------
+
+def sum_and_average(numbers):
+    """Return the sum and average of a list of numbers."""
+    total = sum(numbers)
+    average = total / len(numbers)
+    return total, average
+
+
+num_list = [10, 20, 30, 40, 50]
+print(f"Numbers: {num_list}")
+
+total, avg = sum_and_average(num_list)
+print(f"Sum: {total}")
+print(f"Average: {avg}")
+
+
+
+
+====================================================================
+  TOPIC 04: Programs based on Python Modules
+  (datetime, math, random, string)                       [CO 2]
+====================================================================
+
+
+--------------------------------------------------------------------
+Program 4a: Display the current date and time using datetime module
+--------------------------------------------------------------------
+
+from datetime import datetime
+
+now = datetime.now()
+
+print("Current Date and Time:")
+print(f"  Date & Time: {now}")
+print(f"  Date: {now.strftime('%d-%m-%Y')}")
+print(f"  Time: {now.strftime('%H:%M:%S')}")
+print(f"  Day: {now.strftime('%A')}")
+print(f"  Month: {now.strftime('%B')}")
+print(f"  Year: {now.year}")
+
+
+--------------------------------------------------------------------
+Program 4b: Find the difference between two dates using datetime
+--------------------------------------------------------------------
+
+from datetime import date
+
+date1 = date(2025, 1, 1)
+date2 = date(2025, 12, 31)
+
+difference = date2 - date1
+
+print(f"Date 1: {date1}")
+print(f"Date 2: {date2}")
+print(f"\nDifference: {difference.days} days")
+
+
+--------------------------------------------------------------------
+Program 4c: Find square root, factorial, and power using math module
+--------------------------------------------------------------------
+
+import math
+
+num = float(input("Enter a number: "))
+
+print(f"\nSquare root of {num}: {math.sqrt(num)}")
+print(f"Factorial of {int(num)}: {math.factorial(int(num))}")
+print(f"{num} raised to power 3: {math.pow(num, 3)}")
+print(f"Ceiling of {num}: {math.ceil(num)}")
+print(f"Floor of {num}: {math.floor(num)}")
+print(f"Value of Pi: {math.pi}")
+
+
+--------------------------------------------------------------------
+Program 4d: Generate a random number between 1 and 100
+--------------------------------------------------------------------
+
+import random
+
+random_number = random.randint(1, 100)
+print(f"Random number between 1 and 100: {random_number}")
+
+# Generate multiple random numbers
+print("\n5 Random numbers between 1 and 100:")
+for i in range(5):
+    print(f"  {random.randint(1, 100)}")
+
+
+--------------------------------------------------------------------
+Program 4e: Generate a random password of length 8
+--------------------------------------------------------------------
+
+import random
+import string
+
+def generate_password(length=8):
+    """Generate a random password of given length."""
+    characters = string.ascii_letters + string.digits + string.punctuation
+    password = ''.join(random.choice(characters) for _ in range(length))
+    return password
+
+
+password = generate_password(8)
+print(f"Generated Random Password (length 8): {password}")
+
+
+--------------------------------------------------------------------
+Program 4f: Count the number of vowels in a string using string module
+--------------------------------------------------------------------
+
+import string
+
+text = input("Enter a string: ")
+
+vowels = "aeiouAEIOU"
+vowel_count = 0
+
+for char in text:
+    if char in vowels:
+        vowel_count += 1
+
+print(f"\nString: '{text}'")
+print(f"Number of vowels: {vowel_count}")
+print(f"Vowels found: {[ch for ch in text if ch in vowels]}")
+
+
+--------------------------------------------------------------------
+Program 4g: Shuffle list elements using the random module
+--------------------------------------------------------------------
+
+import random
+
+my_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+print(f"Original List: {my_list}")
+
+random.shuffle(my_list)
+print(f"Shuffled List: {my_list}")
+
+
+--------------------------------------------------------------------
+Program 4h: Check whether characters are alphabets or digits
+--------------------------------------------------------------------
+
+import string
+
+text = input("Enter a string: ")
+
+print(f"\nAnalysis of: '{text}'")
+print("-" * 30)
+
+for char in text:
+    if char in string.ascii_letters:
+        print(f"  '{char}' -> Alphabet")
+    elif char in string.digits:
+        print(f"  '{char}' -> Digit")
+    elif char in string.punctuation:
+        print(f"  '{char}' -> Punctuation")
+    elif char in string.whitespace:
+        print(f"  '{char}' -> Whitespace")
+    else:
+        print(f"  '{char}' -> Other")
+
+
+
+
+====================================================================
+  TOPIC 05: Programs based on Exception Handling
+  (try/except/finally, custom)                           [CO 3]
+====================================================================
+
+
+--------------------------------------------------------------------
+Program 5a: Division program handling ZeroDivision and non-numeric
+--------------------------------------------------------------------
+
+try:
+    num1 = float(input("Enter the numerator: "))
+    num2 = float(input("Enter the denominator: "))
+    result = num1 / num2
+    print(f"\n{num1} / {num2} = {result}")
+
+except ZeroDivisionError:
+    print("\nError: Cannot divide by zero!")
+
+except ValueError:
+    print("\nError: Please enter numeric values only!")
+
+except Exception as e:
+    print(f"\nUnexpected error: {e}")
+
+
+--------------------------------------------------------------------
+Program 5b: Access list element by index with out-of-range handling
+--------------------------------------------------------------------
+
+my_list = [10, 20, 30, 40, 50]
+print(f"List: {my_list}")
+print(f"Valid indices: 0 to {len(my_list) - 1}")
+
+try:
+    index = int(input("\nEnter the index to access: "))
+    value = my_list[index]
+    print(f"Element at index {index}: {value}")
+
+except IndexError:
+    print(f"\nError: Index out of range! Valid indices are 0 to {len(my_list) - 1}")
+
+except ValueError:
+    print("\nError: Please enter a valid integer index!")
+
+
+--------------------------------------------------------------------
+Program 5c: File reading with FileNotFoundError and finally block
+--------------------------------------------------------------------
+
+filename = input("Enter the filename to read: ")
+
+try:
+    file = open(filename, "r")
+    content = file.read()
+    print(f"\nFile Contents:\n{content}")
+
+except FileNotFoundError:
+    print(f"\nError: File '{filename}' not found!")
+
+except PermissionError:
+    print(f"\nError: Permission denied to read '{filename}'!")
+
+except Exception as e:
+    print(f"\nUnexpected error: {e}")
+
+finally:
+    print("\n--- File operation completed (finally block executed) ---")
+
+
+--------------------------------------------------------------------
+Program 5d: Custom exception: NegativeNumberError for negative inputs
+--------------------------------------------------------------------
+
+class NegativeNumberError(Exception):
+    """Custom exception for negative number inputs."""
+    def __init__(self, value):
+        self.value = value
+        self.message = f"Negative number not allowed: {value}"
+        super().__init__(self.message)
+
+
+def check_positive(number):
+    """Check if a number is positive, raise error if negative."""
+    if number < 0:
+        raise NegativeNumberError(number)
+    return f"{number} is a positive number"
+
+
+try:
+    num = float(input("Enter a positive number: "))
+    result = check_positive(num)
+    print(result)
+
+except NegativeNumberError as e:
+    print(f"Error: {e}")
+
+except ValueError:
+    print("Error: Please enter a valid number!")
+
+
+--------------------------------------------------------------------
+Program 5e: Simulate ATM withdrawal with InsufficientBalanceError
+--------------------------------------------------------------------
+
+class InsufficientBalanceError(Exception):
+    """Custom exception for insufficient balance."""
+    def __init__(self, balance, amount):
+        self.balance = balance
+        self.amount = amount
+        self.message = f"Insufficient balance! Available: Rs.{balance}, Requested: Rs.{amount}"
+        super().__init__(self.message)
+
+
+def withdraw(balance, amount):
+    """Simulate ATM withdrawal."""
+    if amount > balance:
+        raise InsufficientBalanceError(balance, amount)
+    if amount <= 0:
+        raise ValueError("Withdrawal amount must be positive!")
+    return balance - amount
+
+
+# ATM Simulation
+balance = 10000
+print(f"Current Balance: Rs.{balance}")
+
+try:
+    amount = float(input("Enter withdrawal amount: Rs."))
+    new_balance = withdraw(balance, amount)
+    print(f"\n Withdrawal successful!")
+    print(f"  Amount withdrawn: Rs.{amount}")
+    print(f"  Remaining balance: Rs.{new_balance}")
+
+except InsufficientBalanceError as e:
+    print(f"\n Transaction Failed: {e}")
+
+except ValueError as e:
+    print(f"\n Invalid Input: {e}")
+
+
+--------------------------------------------------------------------
+Program 5f: Divide 100 by user input with full error handling
+--------------------------------------------------------------------
+
+try:
+    user_input = input("Enter a number to divide 100 by: ")
+    num = float(user_input)
+    result = 100 / num
+    print(f"\n100 / {num} = {result}")
+
+except ZeroDivisionError:
+    print("\nError: Cannot divide by zero!")
+
+except ValueError:
+    print(f"\nError: '{user_input}' is not a valid number!")
+
+except Exception as e:
+    print(f"\nUnexpected error: {e}")
+
+else:
+    print("Division performed successfully!")
+
+finally:
+    print("--- Program execution completed ---")
+
+
+
+
+====================================================================
+  TOPIC 06: Programs based on File I/O Operations
+  (Text, Binary, CSV)                                   [CO 4]
+====================================================================
+
+
+--------------------------------------------------------------------
+Program 6a: Write a paragraph to data.txt and then read/display it
+--------------------------------------------------------------------
+
+# Writing to file
+paragraph = """Python is a versatile programming language known for its simplicity and readability.
+It is widely used in web development, data science, artificial intelligence, and automation.
+Python's extensive library support makes it one of the most popular languages in the world."""
+
+with open("data.txt", "w") as file:
+    file.write(paragraph)
+print("Data written to 'data.txt' successfully!")
+
+# Reading from file
+print("\nReading from 'data.txt':")
+print("-" * 50)
+with open("data.txt", "r") as file:
+    content = file.read()
+    print(content)
+
+
+--------------------------------------------------------------------
+Program 6b: Count lines, words, and characters in a text file
+--------------------------------------------------------------------
+
+# First, create a sample file
+sample_text = """Hello World
+Python Programming is fun
+Learning file operations
+This is the fourth line
+Python is great"""
+
+with open("sample.txt", "w") as f:
+    f.write(sample_text)
+
+# Count lines, words, and characters
+with open("sample.txt", "r") as file:
+    content = file.read()
+    lines = content.split("\n")
+    words = content.split()
+    characters = len(content)
+
+print(f"File: sample.txt")
+print(f"-" * 30)
+print(f"Lines: {len(lines)}")
+print(f"Words: {len(words)}")
+print(f"Characters: {characters}")
+
+
+--------------------------------------------------------------------
+Program 6c: Copy contents from source.txt to target.txt
+--------------------------------------------------------------------
+
+# Create source file
+with open("source.txt", "w") as f:
+    f.write("This is the content of source file.\nLine 2 of source.\nLine 3 of source.")
+
+# Copy from source.txt to target.txt
+with open("source.txt", "r") as source:
+    content = source.read()
+
+with open("target.txt", "w") as target:
+    target.write(content)
+
+print("Contents copied from 'source.txt' to 'target.txt' successfully!")
+
+# Verify by reading target file
+print("\nContents of 'target.txt':")
+with open("target.txt", "r") as f:
+    print(f.read())
+
+
+--------------------------------------------------------------------
+Program 6d: Store and read student marks using a binary file
+--------------------------------------------------------------------
+
+import pickle
+
+# Student data
+students = [
+    {"name": "Shriyash", "roll_no": 101, "marks": 85},
+    {"name": "Rahul", "roll_no": 102, "marks": 90},
+    {"name": "Priya", "roll_no": 103, "marks": 78},
+]
+
+# Writing to binary file
+with open("students.dat", "wb") as file:
+    pickle.dump(students, file)
+print("Student data written to 'students.dat' (binary file)")
+
+# Reading from binary file
+with open("students.dat", "rb") as file:
+    loaded_students = pickle.load(file)
+
+print("\nStudent Data read from binary file:")
+print("-" * 40)
+for student in loaded_students:
+    print(f"  Name: {student['name']}, Roll No: {student['roll_no']}, Marks: {student['marks']}")
+
+
+--------------------------------------------------------------------
+Program 6e: Store details of 3 students into a CSV file
+--------------------------------------------------------------------
+
+import csv
+
+# Student data
+students = [
+    ["Roll No", "Name", "Branch", "Marks"],
+    [101, "Shriyash", "Computer Science", 85],
+    [102, "Rahul", "IT", 90],
+    [103, "Priya", "Electronics", 78],
+]
+
+# Writing to CSV file
+with open("students.csv", "w", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerows(students)
+
+print("Student details stored in 'students.csv' successfully!")
+
+# Reading and displaying
+print("\nContents of students.csv:")
+print("-" * 50)
+with open("students.csv", "r") as file:
+    reader = csv.reader(file)
+    for row in reader:
+        print(row)
+
+
+--------------------------------------------------------------------
+Program 6f: Read CSV and display students with marks > 75
+--------------------------------------------------------------------
+
+import csv
+
+# First create a CSV file with student data
+students = [
+    ["Roll No", "Name", "Branch", "Marks"],
+    [101, "Shriyash", "Computer Science", 85],
+    [102, "Rahul", "IT", 90],
+    [103, "Priya", "Electronics", 60],
+    [104, "Amit", "Mechanical", 78],
+    [105, "Neha", "Civil", 55],
+]
+
+with open("marks.csv", "w", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerows(students)
+
+# Read CSV and filter students with marks > 75
+print("Students with Marks > 75:")
+print("-" * 50)
+
+with open("marks.csv", "r") as file:
+    reader = csv.reader(file)
+    header = next(reader)
+    print(f"{'Roll No':<10}{'Name':<15}{'Branch':<20}{'Marks':<10}")
+    print("-" * 50)
+    for row in reader:
+        if int(row[3]) > 75:
+            print(f"{row[0]:<10}{row[1]:<15}{row[2]:<20}{row[3]:<10}")
+
+
+--------------------------------------------------------------------
+Program 6g: Append a new line of text to an existing file
+--------------------------------------------------------------------
+
+# Create initial file
+with open("append_demo.txt", "w") as f:
+    f.write("Line 1: This is the original content.\n")
+    f.write("Line 2: Python is great.\n")
+
+print("Original file content:")
+with open("append_demo.txt", "r") as f:
+    print(f.read())
+
+# Append new line
+new_line = "Line 3: This line was appended later.\n"
+with open("append_demo.txt", "a") as f:
+    f.write(new_line)
+
+print("After appending:")
+with open("append_demo.txt", "r") as f:
+    print(f.read())
+
+
+
+
+====================================================================
+  TOPIC 07: Programs based on Python Classes and Objects
+                                                         [CO 4]
+====================================================================
+
+
+--------------------------------------------------------------------
+Program 7a: Student class with constructor and display() method
+--------------------------------------------------------------------
+
+class Student:
+    def __init__(self, name, roll_no, branch, marks):
+        self.name = name
+        self.roll_no = roll_no
+        self.branch = branch
+        self.marks = marks
+
+    def display(self):
+        print(f"Name: {self.name}")
+        print(f"Roll No: {self.roll_no}")
+        print(f"Branch: {self.branch}")
+        print(f"Marks: {self.marks}")
+        print()
+
+
+# Creating objects
+s1 = Student("Shriyash", 101, "Computer Science", 85)
+s2 = Student("Rahul", 102, "IT", 90)
+
+print("Student 1:")
+s1.display()
+
+print("Student 2:")
+s2.display()
+
+
+--------------------------------------------------------------------
+Program 7b: Rectangle class to calculate area and perimeter
+--------------------------------------------------------------------
+
+class Rectangle:
+    def __init__(self, length, breadth):
+        self.length = length
+        self.breadth = breadth
+
+    def area(self):
+        return self.length * self.breadth
+
+    def perimeter(self):
+        return 2 * (self.length + self.breadth)
+
+    def display(self):
+        print(f"Length: {self.length}")
+        print(f"Breadth: {self.breadth}")
+        print(f"Area: {self.area()}")
+        print(f"Perimeter: {self.perimeter()}")
+
+
+# Creating object
+rect = Rectangle(10, 5)
+print("Rectangle Details:")
+rect.display()
+
+
+--------------------------------------------------------------------
+Program 7c: BankAccount class with deposit, withdraw, display methods
+--------------------------------------------------------------------
+
+class BankAccount:
+    def __init__(self, name, account_no, balance=0):
+        self.name = name
+        self.account_no = account_no
+        self.balance = balance
+
+    def deposit(self, amount):
+        if amount > 0:
+            self.balance += amount
+            print(f"Rs.{amount} deposited successfully.")
+        else:
+            print("Invalid deposit amount.")
+
+    def withdraw(self, amount):
+        if amount > self.balance:
+            print("Insufficient balance!")
+        elif amount <= 0:
+            print("Invalid withdrawal amount.")
+        else:
+            self.balance -= amount
+            print(f"Rs.{amount} withdrawn successfully.")
+
+    def display(self):
+        print(f"Account Holder: {self.name}")
+        print(f"Account No: {self.account_no}")
+        print(f"Balance: Rs.{self.balance}")
+        print()
+
+
+# Creating object and performing operations
+acc = BankAccount("Shriyash", "ACC001", 5000)
+print("Initial Details:")
+acc.display()
+
+acc.deposit(3000)
+acc.display()
+
+acc.withdraw(2000)
+acc.display()
+
+acc.withdraw(10000)  # Insufficient balance
+
+
+--------------------------------------------------------------------
+Program 7d: Employee class to calculate total salary (Basic + HRA + DA)
+--------------------------------------------------------------------
+
+class Employee:
+    def __init__(self, name, emp_id, basic_salary):
+        self.name = name
+        self.emp_id = emp_id
+        self.basic_salary = basic_salary
+
+    def calculate_hra(self):
+        """HRA = 20% of Basic Salary"""
+        return self.basic_salary * 0.20
+
+    def calculate_da(self):
+        """DA = 30% of Basic Salary"""
+        return self.basic_salary * 0.30
+
+    def total_salary(self):
+        return self.basic_salary + self.calculate_hra() + self.calculate_da()
+
+    def display(self):
+        print(f"Employee Name: {self.name}")
+        print(f"Employee ID: {self.emp_id}")
+        print(f"Basic Salary: Rs.{self.basic_salary}")
+        print(f"HRA (20%): Rs.{self.calculate_hra()}")
+        print(f"DA (30%): Rs.{self.calculate_da()}")
+        print(f"Total Salary: Rs.{self.total_salary()}")
+
+
+# Creating object
+emp = Employee("Shriyash", "EMP001", 30000)
+print("Employee Details:")
+emp.display()
+
+
+--------------------------------------------------------------------
+Program 7e: Circle class to calculate area and circumference
+--------------------------------------------------------------------
+
+import math
+
+class Circle:
+    def __init__(self, radius):
+        self.radius = radius
+
+    def area(self):
+        return math.pi * self.radius ** 2
+
+    def circumference(self):
+        return 2 * math.pi * self.radius
+
+    def display(self):
+        print(f"Radius: {self.radius}")
+        print(f"Area: {self.area():.2f}")
+        print(f"Circumference: {self.circumference():.2f}")
+
+
+# Creating object
+c = Circle(7)
+print("Circle Details:")
+c.display()
+
+
+--------------------------------------------------------------------
+Program 7f: Car class with show_details() method
+--------------------------------------------------------------------
+
+class Car:
+    def __init__(self, brand, model, year, color, price):
+        self.brand = brand
+        self.model = model
+        self.year = year
+        self.color = color
+        self.price = price
+
+    def show_details(self):
+        print(f"Brand: {self.brand}")
+        print(f"Model: {self.model}")
+        print(f"Year: {self.year}")
+        print(f"Color: {self.color}")
+        print(f"Price: Rs.{self.price:,.2f}")
+        print()
+
+
+# Creating objects
+car1 = Car("Toyota", "Fortuner", 2024, "White", 4500000)
+car2 = Car("Hyundai", "Creta", 2025, "Black", 1500000)
+
+print("Car 1 Details:")
+car1.show_details()
+
+print("Car 2 Details:")
+car2.show_details()
+
+
+--------------------------------------------------------------------
+Program 7g: Temperature class to convert Celsius to Fahrenheit
+--------------------------------------------------------------------
+
+class Temperature:
+    def __init__(self, celsius):
+        self.celsius = celsius
+
+    def to_fahrenheit(self):
+        return (self.celsius * 9 / 5) + 32
+
+    def display(self):
+        fahrenheit = self.to_fahrenheit()
+        print(f"{self.celsius} C = {fahrenheit} F")
+
+
+# Creating objects and converting
+temp1 = Temperature(0)
+temp2 = Temperature(100)
+temp3 = Temperature(37)
+
+print("Temperature Conversions:")
+print("-" * 25)
+temp1.display()
+temp2.display()
+temp3.display()
+
+
+
+
+====================================================================
+  TOPIC 08: Programs based on OOP Concepts
+  (Inheritance, Polymorphism, Encapsulation)              [CO 5]
+====================================================================
+
+
+--------------------------------------------------------------------
+Program 8a: Single Inheritance: Person class to Student class
+--------------------------------------------------------------------
+
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def display_person(self):
+        print(f"Name: {self.name}")
+        print(f"Age: {self.age}")
+
+
+class Student(Person):
+    def __init__(self, name, age, roll_no, marks):
+        super().__init__(name, age)
+        self.roll_no = roll_no
+        self.marks = marks
+
+    def display_student(self):
+        self.display_person()
+        print(f"Roll No: {self.roll_no}")
+        print(f"Marks: {self.marks}")
+
+
+# Creating object
+s = Student("Shriyash", 20, 101, 85)
+print("Student Details (Single Inheritance):")
+s.display_student()
+
+
+--------------------------------------------------------------------
+Program 8b: Multilevel Inheritance: Animal -> Dog -> Puppy
+--------------------------------------------------------------------
+
+class Animal:
+    def __init__(self, name):
+        self.name = name
+
+    def eat(self):
+        print(f"{self.name} is eating.")
+
+
+class Dog(Animal):
+    def __init__(self, name, breed):
+        super().__init__(name)
+        self.breed = breed
+
+    def bark(self):
+        print(f"{self.name} is barking. Woof!")
+
+
+class Puppy(Dog):
+    def __init__(self, name, breed, age_months):
+        super().__init__(name, breed)
+        self.age_months = age_months
+
+    def play(self):
+        print(f"{self.name} the {self.breed} puppy ({self.age_months} months old) is playing!")
+
+
+# Creating object
+p = Puppy("Buddy", "Golden Retriever", 3)
+print("Multilevel Inheritance: Animal -> Dog -> Puppy")
+print("-" * 40)
+p.eat()       # From Animal
+p.bark()      # From Dog
+p.play()      # From Puppy
+
+
+--------------------------------------------------------------------
+Program 8c: Hierarchical Inheritance: Shape -> Rectangle and Triangle
+--------------------------------------------------------------------
+
+class Shape:
+    def __init__(self, name):
+        self.name = name
+
+    def display(self):
+        print(f"Shape: {self.name}")
+
+
+class Rectangle(Shape):
+    def __init__(self, length, breadth):
+        super().__init__("Rectangle")
+        self.length = length
+        self.breadth = breadth
+
+    def area(self):
+        return self.length * self.breadth
+
+
+class Triangle(Shape):
+    def __init__(self, base, height):
+        super().__init__("Triangle")
+        self.base = base
+        self.height = height
+
+    def area(self):
+        return 0.5 * self.base * self.height
+
+
+# Creating objects
+print("Hierarchical Inheritance: Shape -> Rectangle & Triangle")
+print("-" * 50)
+
+rect = Rectangle(10, 5)
+rect.display()
+print(f"Area: {rect.area()}\n")
+
+tri = Triangle(8, 6)
+tri.display()
+print(f"Area: {tri.area()}")
+
+
+--------------------------------------------------------------------
+Program 8d: Method Overriding: Employee work() in Manager/Developer
+--------------------------------------------------------------------
+
+class Employee:
+    def __init__(self, name):
+        self.name = name
+
+    def work(self):
+        print(f"{self.name} is working.")
+
+
+class Manager(Employee):
+    def work(self):
+        print(f"{self.name} is managing the team and conducting meetings.")
+
+
+class Developer(Employee):
+    def work(self):
+        print(f"{self.name} is writing code and debugging software.")
+
+
+# Creating objects
+print("Method Overriding Example:")
+print("-" * 50)
+
+emp = Employee("Generic Employee")
+emp.work()
+
+mgr = Manager("Rahul")
+mgr.work()
+
+dev = Developer("Shriyash")
+dev.work()
+
+
+--------------------------------------------------------------------
+Program 8e: Polymorphism: Bird and Airplane both using fly() method
+--------------------------------------------------------------------
+
+class Bird:
+    def __init__(self, name):
+        self.name = name
+
+    def fly(self):
+        print(f"{self.name} flies by flapping its wings.")
+
+
+class Airplane:
+    def __init__(self, model):
+        self.model = model
+
+    def fly(self):
+        print(f"{self.model} flies using jet engines.")
+
+
+# Polymorphism in action
+def make_it_fly(obj):
+    obj.fly()
+
+
+print("Polymorphism Example:")
+print("-" * 40)
+
+bird = Bird("Eagle")
+plane = Airplane("Boeing 747")
+
+make_it_fly(bird)
+make_it_fly(plane)
+
+
+--------------------------------------------------------------------
+Program 8f: Encapsulation: BankAccount with private balance variable
+--------------------------------------------------------------------
+
+class BankAccount:
+    def __init__(self, name, balance):
+        self.name = name
+        self.__balance = balance  # Private variable
+
+    def deposit(self, amount):
+        if amount > 0:
+            self.__balance += amount
+            print(f"Rs.{amount} deposited.")
+        else:
+            print("Invalid amount.")
+
+    def withdraw(self, amount):
+        if 0 < amount <= self.__balance:
+            self.__balance -= amount
+            print(f"Rs.{amount} withdrawn.")
+        else:
+            print("Invalid amount or insufficient balance.")
+
+    def get_balance(self):
+        return self.__balance
+
+    def display(self):
+        print(f"Account Holder: {self.name}")
+        print(f"Balance: Rs.{self.__balance}")
+
+
+# Creating object
+acc = BankAccount("Shriyash", 5000)
+print("Encapsulation Example (Private Balance):")
+print("-" * 40)
+acc.display()
+
+acc.deposit(3000)
+acc.display()
+
+acc.withdraw(2000)
+acc.display()
+
+# Trying to access private variable directly
+print(f"\nAccessing via getter: Rs.{acc.get_balance()}")
+
+
+--------------------------------------------------------------------
+Program 8g: Encapsulation: Employee with private salary (Getter/Setter)
+--------------------------------------------------------------------
+
+class Employee:
+    def __init__(self, name, emp_id, salary):
+        self.name = name
+        self.emp_id = emp_id
+        self.__salary = salary  # Private variable
+
+    # Getter
+    @property
+    def salary(self):
+        return self.__salary
+
+    # Setter
+    @salary.setter
+    def salary(self, new_salary):
+        if new_salary > 0:
+            self.__salary = new_salary
+            print(f"Salary updated to Rs.{new_salary}")
+        else:
+            print("Salary must be positive!")
+
+    def display(self):
+        print(f"Name: {self.name}")
+        print(f"Employee ID: {self.emp_id}")
+        print(f"Salary: Rs.{self.__salary}")
+
+
+# Creating object
+emp = Employee("Shriyash", "EMP001", 50000)
+print("Encapsulation with Getter/Setter:")
+print("-" * 40)
+emp.display()
+
+# Using setter
+print()
+emp.salary = 60000
+emp.display()
+
+# Using getter
+print(f"\nUsing getter: Rs.{emp.salary}")
+
+
+--------------------------------------------------------------------
+Program 8h: Hybrid/Overriding: Vehicle start() in Car and Bike
+--------------------------------------------------------------------
+
+class Vehicle:
+    def __init__(self, name, fuel_type):
+        self.name = name
+        self.fuel_type = fuel_type
+
+    def start(self):
+        print(f"{self.name} is starting...")
+
+    def display(self):
+        print(f"Vehicle: {self.name}, Fuel: {self.fuel_type}")
+
+
+class Car(Vehicle):
+    def __init__(self, name, fuel_type, num_doors):
+        super().__init__(name, fuel_type)
+        self.num_doors = num_doors
+
+    def start(self):
+        print(f"{self.name} (Car) starts with key ignition. Vroom!")
+
+
+class Bike(Vehicle):
+    def __init__(self, name, fuel_type, bike_type):
+        super().__init__(name, fuel_type)
+        self.bike_type = bike_type
+
+    def start(self):
+        print(f"{self.name} (Bike) starts with a kick/self-start. Brrr!")
+
+
+# Creating objects
+print("Hybrid/Method Overriding Example:")
+print("-" * 45)
+
+v = Vehicle("Generic Vehicle", "Petrol")
+v.start()
+
+car = Car("Toyota Fortuner", "Diesel", 4)
+car.start()
+
+bike = Bike("Royal Enfield", "Petrol", "Cruiser")
+bike.start()
+
+
+
+
+====================================================================
+  TOPIC 09: Programs based on Flask Web Basics
+  (Routes, Templates)                                    [CO 6]
+====================================================================
+
+
+--------------------------------------------------------------------
+Program 9a: Create a simple Flask route for "Welcome to Flask"
+--------------------------------------------------------------------
+
+from flask import Flask
+
+app = Flask(__name__)
+
+
+@app.route('/')
+def welcome():
+    return "<h1>Welcome to Flask!</h1>"
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+--------------------------------------------------------------------
+Program 9b: Create multiple routes (/ and /about)
+--------------------------------------------------------------------
+
+from flask import Flask
+
+app = Flask(__name__)
+
+
+@app.route('/')
+def home():
+    return "<h1>Home Page</h1><p>Welcome to the Flask application!</p><a href='/about'>Go to About</a>"
+
+
+@app.route('/about')
+def about():
+    return "<h1>About Page</h1><p>This is a Flask application demonstrating multiple routes.</p><a href='/'>Go to Home</a>"
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+--------------------------------------------------------------------
+Program 9c: Create a route with a variable for URL greetings
+--------------------------------------------------------------------
+
+from flask import Flask
+
+app = Flask(__name__)
+
+
+@app.route('/')
+def home():
+    return "<h1>Home</h1><p>Try visiting /greet/YourName</p>"
+
+
+@app.route('/greet/<name>')
+def greet(name):
+    return f"<h1>Hello, {name}!</h1><p>Welcome to our Flask app.</p>"
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+--------------------------------------------------------------------
+Program 9d: Render an HTML template (index.html)
+--------------------------------------------------------------------
+
+# app.py
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+# templates/index.html
+# ---
+# <!DOCTYPE html>
+# <html>
+# <head>
+#     <title>Flask Template</title>
+# </head>
+# <body>
+#     <h1>Welcome to Flask Templates!</h1>
+#     <p>This page is rendered using render_template().</p>
+# </body>
+# </html>
+
+
+--------------------------------------------------------------------
+Program 9e: Pass data (name) from Flask to a template
+--------------------------------------------------------------------
+
+# app.py
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+
+@app.route('/')
+def home():
+    student_name = "Shriyash"
+    return render_template('greeting.html', name=student_name)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+# templates/greeting.html
+# ---
+# <!DOCTYPE html>
+# <html>
+# <head>
+#     <title>Greeting</title>
+# </head>
+# <body>
+#     <h1>Hello, {{ name }}!</h1>
+#     <p>Welcome to Flask. This data was passed from the server.</p>
+# </body>
+# </html>
+
+
+--------------------------------------------------------------------
+Program 9f: Template logic: Display Pass/Fail based on marks
+--------------------------------------------------------------------
+
+# app.py
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+
+@app.route('/')
+def result():
+    student = {"name": "Shriyash", "marks": 85}
+    return render_template('result.html', student=student)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+# templates/result.html
+# ---
+# <!DOCTYPE html>
+# <html>
+# <head>
+#     <title>Result</title>
+# </head>
+# <body>
+#     <h1>Student Result</h1>
+#     <p>Name: {{ student.name }}</p>
+#     <p>Marks: {{ student.marks }}</p>
+#     {% if student.marks >= 40 %}
+#         <p style="color: green;"><strong>Result: PASS</strong></p>
+#     {% else %}
+#         <p style="color: red;"><strong>Result: FAIL</strong></p>
+#     {% endif %}
+# </body>
+# </html>
+
+
+--------------------------------------------------------------------
+Program 9g: Template logic: Display a list of subjects using a loop
+--------------------------------------------------------------------
+
+# app.py
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+
+@app.route('/')
+def subjects():
+    subject_list = ["Python", "Java", "DBMS", "Data Structures", "Operating Systems"]
+    return render_template('subjects.html', subjects=subject_list)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+# templates/subjects.html
+# ---
+# <!DOCTYPE html>
+# <html>
+# <head>
+#     <title>Subjects</title>
+# </head>
+# <body>
+#     <h1>List of Subjects</h1>
+#     <ol>
+#         {% for subject in subjects %}
+#             <li>{{ subject }}</li>
+#         {% endfor %}
+#     </ol>
+# </body>
+# </html>
+
+
+--------------------------------------------------------------------
+Program 9h: Create a simple form that displays the submitted name
+--------------------------------------------------------------------
+
+# app.py
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+
+@app.route('/', methods=['GET', 'POST'])
+def form():
+    name = None
+    if request.method == 'POST':
+        name = request.form.get('name')
+    return render_template('form.html', name=name)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+# templates/form.html
+# ---
+# <!DOCTYPE html>
+# <html>
+# <head>
+#     <title>Simple Form</title>
+# </head>
+# <body>
+#     <h1>Enter Your Name</h1>
+#     <form method="POST">
+#         <label for="name">Name:</label>
+#         <input type="text" id="name" name="name" required>
+#         <button type="submit">Submit</button>
+#     </form>
+#
+#     {% if name %}
+#         <h2>Hello, {{ name }}! Welcome!</h2>
+#     {% endif %}
+# </body>
+# </html>
+
+
+
+
+====================================================================
+  TOPIC 10: Programs based on Flask Forms Handling
+  (GET/POST, Validation)                                 [CO 6]
+====================================================================
+
+
+--------------------------------------------------------------------
+Program 10a: Simple form using the GET method
+--------------------------------------------------------------------
+
+from flask import Flask, request, render_template_string
+
+app = Flask(__name__)
+
+TEMPLATE = """
+<!DOCTYPE html>
+<html>
+<head><title>GET Form</title></head>
+<body>
+    <h1>Simple GET Form</h1>
+    <form method="GET" action="/result">
+        <label>Enter your name: </label>
+        <input type="text" name="name" required>
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
+"""
+
+RESULT_TEMPLATE = """
+<!DOCTYPE html>
+<html>
+<head><title>Result</title></head>
+<body>
+    <h1>Hello, {{ name }}!</h1>
+    <p>Data received via GET method.</p>
+    <a href="/">Go Back</a>
+</body>
+</html>
+"""
+
+
+@app.route('/')
+def form():
+    return render_template_string(TEMPLATE)
+
+
+@app.route('/result')
+def result():
+    name = request.args.get('name', 'Guest')
+    return render_template_string(RESULT_TEMPLATE, name=name)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+--------------------------------------------------------------------
+Program 10b: Form using the POST method
+--------------------------------------------------------------------
+
+from flask import Flask, request, render_template_string
+
+app = Flask(__name__)
+
+TEMPLATE = """
+<!DOCTYPE html>
+<html>
+<head><title>POST Form</title></head>
+<body>
+    <h1>POST Method Form</h1>
+    <form method="POST">
+        <label>Enter your name: </label>
+        <input type="text" name="name" required><br><br>
+        <label>Enter your email: </label>
+        <input type="email" name="email" required><br><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if name %}
+        <h2>Submitted Data:</h2>
+        <p>Name: {{ name }}</p>
+        <p>Email: {{ email }}</p>
+    {% endif %}
+</body>
+</html>
+"""
+
+
+@app.route('/', methods=['GET', 'POST'])
+def form():
+    name = email = None
+    if request.method == 'POST':
+        name = request.form.get('name')
+        email = request.form.get('email')
+    return render_template_string(TEMPLATE, name=name, email=email)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+--------------------------------------------------------------------
+Program 10c: Login form with validation
+--------------------------------------------------------------------
+
+from flask import Flask, request, render_template_string
+
+app = Flask(__name__)
+
+TEMPLATE = """
+<!DOCTYPE html>
+<html>
+<head><title>Login Form</title></head>
+<body>
+    <h1>Login Form</h1>
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    {% if success %}
+        <p style="color: green;">{{ success }}</p>
+    {% endif %}
+
+    <form method="POST">
+        <label>Username: </label>
+        <input type="text" name="username" required><br><br>
+        <label>Password: </label>
+        <input type="password" name="password" required><br><br>
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>
+"""
+
+
+@app.route('/', methods=['GET', 'POST'])
+def login():
+    error = success = None
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+
+        if username == 'admin' and password == 'admin123':
+            success = f"Welcome, {username}! Login successful."
+        else:
+            error = "Invalid username or password!"
+
+    return render_template_string(TEMPLATE, error=error, success=success)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+--------------------------------------------------------------------
+Program 10d: Registration form with validation
+--------------------------------------------------------------------
+
+from flask import Flask, request, render_template_string
+
+app = Flask(__name__)
+
+TEMPLATE = """
+<!DOCTYPE html>
+<html>
+<head><title>Registration Form</title></head>
+<body>
+    <h1>Registration Form</h1>
+    {% if errors %}
+        <ul style="color: red;">
+        {% for err in errors %}
+            <li>{{ err }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    {% if success %}
+        <p style="color: green;">{{ success }}</p>
+    {% endif %}
+
+    <form method="POST">
+        <label>Name: </label>
+        <input type="text" name="name"><br><br>
+        <label>Email: </label>
+        <input type="text" name="email"><br><br>
+        <label>Password: </label>
+        <input type="password" name="password"><br><br>
+        <label>Confirm Password: </label>
+        <input type="password" name="confirm_password"><br><br>
+        <button type="submit">Register</button>
+    </form>
+</body>
+</html>
+"""
+
+
+@app.route('/', methods=['GET', 'POST'])
+def register():
+    errors = []
+    success = None
+
+    if request.method == 'POST':
+        name = request.form.get('name', '').strip()
+        email = request.form.get('email', '').strip()
+        password = request.form.get('password', '')
+        confirm = request.form.get('confirm_password', '')
+
+        if not name:
+            errors.append("Name is required.")
+        if not email or '@' not in email:
+            errors.append("Valid email is required.")
+        if len(password) < 6:
+            errors.append("Password must be at least 6 characters.")
+        if password != confirm:
+            errors.append("Passwords do not match.")
+
+        if not errors:
+            success = f"Registration successful! Welcome, {name}."
+
+    return render_template_string(TEMPLATE, errors=errors, success=success)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+--------------------------------------------------------------------
+Program 10e: Feedback form using textarea and radio buttons
+--------------------------------------------------------------------
+
+from flask import Flask, request, render_template_string
+
+app = Flask(__name__)
+
+TEMPLATE = """
+<!DOCTYPE html>
+<html>
+<head><title>Feedback Form</title></head>
+<body>
+    <h1>Feedback Form</h1>
+
+    {% if feedback %}
+        <h2>Submitted Feedback:</h2>
+        <p><strong>Name:</strong> {{ feedback.name }}</p>
+        <p><strong>Rating:</strong> {{ feedback.rating }}</p>
+        <p><strong>Comments:</strong> {{ feedback.comments }}</p>
+        <hr>
+    {% endif %}
+
+    <form method="POST">
+        <label>Name: </label>
+        <input type="text" name="name" required><br><br>
+
+        <label>Rating: </label><br>
+        <input type="radio" name="rating" value="Excellent" required> Excellent<br>
+        <input type="radio" name="rating" value="Good"> Good<br>
+        <input type="radio" name="rating" value="Average"> Average<br>
+        <input type="radio" name="rating" value="Poor"> Poor<br><br>
+
+        <label>Comments: </label><br>
+        <textarea name="comments" rows="4" cols="40" required></textarea><br><br>
+
+        <button type="submit">Submit Feedback</button>
+    </form>
+</body>
+</html>
+"""
+
+
+@app.route('/', methods=['GET', 'POST'])
+def feedback():
+    feedback_data = None
+    if request.method == 'POST':
+        feedback_data = {
+            'name': request.form.get('name'),
+            'rating': request.form.get('rating'),
+            'comments': request.form.get('comments')
+        }
+    return render_template_string(TEMPLATE, feedback=feedback_data)
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+
+
+
+====================================================================
+  TOPIC 11: Programs based on MySQL Integration with Python
+                                                         [CO 6]
+====================================================================
+
+
+--------------------------------------------------------------------
+Program 11 (a-g): Connect, Create DB/Table, Insert, Fetch, Update,
+                   and Delete
+--------------------------------------------------------------------
+
+import mysql.connector
+
+# ============================================================
+# a) Connect to MySQL Server
+# ============================================================
+def connect_to_mysql():
+    """Connect to MySQL server."""
+    conn = mysql.connector.connect(
+        host="localhost",
+        user="root",
+        password="root"  # Change this to your MySQL password
+    )
+    print("Connected to MySQL Server successfully!")
+    return conn
+
+
+# ============================================================
+# b) Create Database
+# ============================================================
+def create_database(conn):
+    """Create a database named 'student_db'."""
+    cursor = conn.cursor()
+    cursor.execute("CREATE DATABASE IF NOT EXISTS student_db")
+    print("Database 'student_db' created successfully!")
+    cursor.close()
+
+
+# ============================================================
+# c) Create Table
+# ============================================================
+def create_table(conn):
+    """Create a 'students' table."""
+    cursor = conn.cursor()
+    cursor.execute("USE student_db")
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS students (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            name VARCHAR(100) NOT NULL,
+            branch VARCHAR(100),
+            marks INT
+        )
+    """)
+    print("Table 'students' created successfully!")
+    cursor.close()
+
+
+# ============================================================
+# d) Insert Records
+# ============================================================
+def insert_records(conn):
+    """Insert student records into the table."""
+    cursor = conn.cursor()
+    cursor.execute("USE student_db")
+
+    students = [
+        ("Shriyash", "Computer Science", 85),
+        ("Rahul", "IT", 90),
+        ("Priya", "Electronics", 78),
+        ("Amit", "Mechanical", 65),
+        ("Neha", "Civil", 92),
+    ]
+
+    query = "INSERT INTO students (name, branch, marks) VALUES (%s, %s, %s)"
+    cursor.executemany(query, students)
+    conn.commit()
+    print(f"{cursor.rowcount} records inserted successfully!")
+    cursor.close()
+
+
+# ============================================================
+# e) Fetch Records
+# ============================================================
+def fetch_records(conn):
+    """Fetch and display all student records."""
+    cursor = conn.cursor()
+    cursor.execute("USE student_db")
+    cursor.execute("SELECT * FROM students")
+    records = cursor.fetchall()
+
+    print("\n--- Student Records ---")
+    print(f"{'ID':<5}{'Name':<15}{'Branch':<20}{'Marks':<10}")
+    print("-" * 50)
+    for row in records:
+        print(f"{row[0]:<5}{row[1]:<15}{row[2]:<20}{row[3]:<10}")
+    cursor.close()
+
+
+# ============================================================
+# f) Update Records
+# ============================================================
+def update_record(conn, student_id, new_marks):
+    """Update marks for a student."""
+    cursor = conn.cursor()
+    cursor.execute("USE student_db")
+    query = "UPDATE students SET marks = %s WHERE id = %s"
+    cursor.execute(query, (new_marks, student_id))
+    conn.commit()
+    print(f"Student ID {student_id} updated to marks {new_marks}!")
+    cursor.close()
+
+
+# ============================================================
+# g) Delete Records
+# ============================================================
+def delete_record(conn, student_id):
+    """Delete a student record."""
+    cursor = conn.cursor()
+    cursor.execute("USE student_db")
+    query = "DELETE FROM students WHERE id = %s"
+    cursor.execute(query, (student_id,))
+    conn.commit()
+    print(f"Student ID {student_id} deleted successfully!")
+    cursor.close()
+
+
+# ============================================================
+# Main Execution
+# ============================================================
+if __name__ == '__main__':
+    # a) Connect
+    conn = connect_to_mysql()
+
+    # b) Create Database
+    create_database(conn)
+
+    # c) Create Table
+    create_table(conn)
+
+    # d) Insert Records
+    insert_records(conn)
+
+    # e) Fetch Records
+    fetch_records(conn)
+
+    # f) Update Record (update student ID 1 marks to 95)
+    update_record(conn, 1, 95)
+    fetch_records(conn)
+
+    # g) Delete Record (delete student ID 4)
+    delete_record(conn, 4)
+    fetch_records(conn)
+
+    # Close connection
+    conn.close()
+    print("\nConnection closed.")
+
+
+
+
+====================================================================
+  TOPIC 12: Programs based on Flask + MySQL CRUD Operations
+                                                         [CO 6]
+====================================================================
+
+
+--------------------------------------------------------------------
+Program 12a: Student Management System (Full CRUD)
+--------------------------------------------------------------------
+
+from flask import Flask, request, redirect, url_for, render_template_string
+import mysql.connector
+
+app = Flask(__name__)
+
+# Database Configuration
+DB_CONFIG = {
+    'host': 'localhost',
+    'user': 'root',
+    'password': 'root',  # Change to your MySQL password
+    'database': 'student_mgmt'
+}
+
+
+def get_db():
+    """Get database connection."""
+    return mysql.connector.connect(**DB_CONFIG)
+
+
+def init_db():
+    """Initialize database and table."""
+    conn = mysql.connector.connect(host='localhost', user='root', password='root')
+    cursor = conn.cursor()
+    cursor.execute("CREATE DATABASE IF NOT EXISTS student_mgmt")
+    cursor.execute("USE student_mgmt")
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS students (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            name VARCHAR(100) NOT NULL,
+            branch VARCHAR(100),
+            marks INT
+        )
+    """)
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+
+TEMPLATE = """
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Management System</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #4CAF50; color: white; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        form { margin: 20px 0; }
+        input, button { padding: 8px; margin: 5px; }
+        button { background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+        button.delete { background-color: #f44336; }
+        button.edit { background-color: #2196F3; }
+    </style>
+</head>
+<body>
+    <h1>Student Management System</h1>
+
+    <h2>{{ 'Edit Student' if edit_student else 'Add New Student' }}</h2>
+    <form method="POST" action="{{ url_for('update', id=edit_student.id) if edit_student else url_for('add') }}">
+        <input type="text" name="name" placeholder="Name" value="{{ edit_student.name if edit_student else '' }}" required>
+        <input type="text" name="branch" placeholder="Branch" value="{{ edit_student.branch if edit_student else '' }}" required>
+        <input type="number" name="marks" placeholder="Marks" value="{{ edit_student.marks if edit_student else '' }}" required>
+        <button type="submit">{{ 'Update' if edit_student else 'Add Student' }}</button>
+    </form>
+
+    <h2>All Students</h2>
+    <table>
+        <tr><th>ID</th><th>Name</th><th>Branch</th><th>Marks</th><th>Actions</th></tr>
+        {% for s in students %}
+        <tr>
+            <td>{{ s[0] }}</td><td>{{ s[1] }}</td><td>{{ s[2] }}</td><td>{{ s[3] }}</td>
+            <td>
+                <a href="{{ url_for('edit', id=s[0]) }}"><button class="edit">Edit</button></a>
+                <a href="{{ url_for('delete', id=s[0]) }}"><button class="delete">Delete</button></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+"""
+
+
+@app.route('/')
+def index():
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM students")
+    students = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return render_template_string(TEMPLATE, students=students, edit_student=None)
+
+
+@app.route('/add', methods=['POST'])
+def add():
+    name = request.form['name']
+    branch = request.form['branch']
+    marks = request.form['marks']
+
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO students (name, branch, marks) VALUES (%s, %s, %s)",
+                   (name, branch, marks))
+    conn.commit()
+    cursor.close()
+    conn.close()
+    return redirect(url_for('index'))
+
+
+@app.route('/edit/<int:id>')
+def edit(id):
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM students WHERE id = %s", (id,))
+    student = cursor.fetchone()
+    cursor.execute("SELECT * FROM students")
+    students = cursor.fetchall()
+    cursor.close()
+    conn.close()
+
+    class StudentObj:
+        def __init__(self, row):
+            self.id, self.name, self.branch, self.marks = row
+
+    return render_template_string(TEMPLATE, students=students, edit_student=StudentObj(student))
+
+
+@app.route('/update/<int:id>', methods=['POST'])
+def update(id):
+    name = request.form['name']
+    branch = request.form['branch']
+    marks = request.form['marks']
+
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute("UPDATE students SET name=%s, branch=%s, marks=%s WHERE id=%s",
+                   (name, branch, marks, id))
+    conn.commit()
+    cursor.close()
+    conn.close()
+    return redirect(url_for('index'))
+
+
+@app.route('/delete/<int:id>')
+def delete(id):
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM students WHERE id = %s", (id,))
+    conn.commit()
+    cursor.close()
+    conn.close()
+    return redirect(url_for('index'))
+
+
+if __name__ == '__main__':
+    init_db()
+    app.run(debug=True)
+
+
+--------------------------------------------------------------------
+Program 12b: Employee Management System (Full CRUD)
+--------------------------------------------------------------------
+
+from flask import Flask, request, redirect, url_for, render_template_string
+import mysql.connector
+
+app = Flask(__name__)
+
+# Database Configuration
+DB_CONFIG = {
+    'host': 'localhost',
+    'user': 'root',
+    'password': 'root',  # Change to your MySQL password
+    'database': 'employee_mgmt'
+}
+
+
+def get_db():
+    """Get database connection."""
+    return mysql.connector.connect(**DB_CONFIG)
+
+
+def init_db():
+    """Initialize database and table."""
+    conn = mysql.connector.connect(host='localhost', user='root', password='root')
+    cursor = conn.cursor()
+    cursor.execute("CREATE DATABASE IF NOT EXISTS employee_mgmt")
+    cursor.execute("USE employee_mgmt")
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS employees (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            name VARCHAR(100) NOT NULL,
+            department VARCHAR(100),
+            salary DECIMAL(10, 2)
+        )
+    """)
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+
+TEMPLATE = """
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Employee Management System</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #2196F3; color: white; }
+        tr:nth-child(even) { background-color: #f2f2f2; }
+        form { margin: 20px 0; }
+        input, button { padding: 8px; margin: 5px; }
+        button { background-color: #2196F3; color: white; border: none; cursor: pointer; }
+        button.delete { background-color: #f44336; }
+        button.edit { background-color: #FF9800; }
+    </style>
+</head>
+<body>
+    <h1>Employee Management System</h1>
+
+    <h2>{{ 'Edit Employee' if edit_employee else 'Add New Employee' }}</h2>
+    <form method="POST" action="{{ url_for('update', id=edit_employee.id) if edit_employee else url_for('add') }}">
+        <input type="text" name="name" placeholder="Name" value="{{ edit_employee.name if edit_employee else '' }}" required>
+        <input type="text" name="department" placeholder="Department" value="{{ edit_employee.department if edit_employee else '' }}" required>
+        <input type="number" name="salary" placeholder="Salary" step="0.01" value="{{ edit_employee.salary if edit_employee else '' }}" required>
+        <button type="submit">{{ 'Update' if edit_employee else 'Add Employee' }}</button>
+    </form>
+
+    <h2>All Employees</h2>
+    <table>
+        <tr><th>ID</th><th>Name</th><th>Department</th><th>Salary</th><th>Actions</th></tr>
+        {% for e in employees %}
+        <tr>
+            <td>{{ e[0] }}</td><td>{{ e[1] }}</td><td>{{ e[2] }}</td><td>Rs.{{ e[3] }}</td>
+            <td>
+                <a href="{{ url_for('edit', id=e[0]) }}"><button class="edit">Edit</button></a>
+                <a href="{{ url_for('delete', id=e[0]) }}"><button class="delete">Delete</button></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
+"""
+
+
+@app.route('/')
+def index():
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM employees")
+    employees = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return render_template_string(TEMPLATE, employees=employees, edit_employee=None)
+
+
+@app.route('/add', methods=['POST'])
+def add():
+    name = request.form['name']
+    department = request.form['department']
+    salary = request.form['salary']
+
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute("INSERT INTO employees (name, department, salary) VALUES (%s, %s, %s)",
+                   (name, department, salary))
+    conn.commit()
+    cursor.close()
+    conn.close()
+    return redirect(url_for('index'))
+
+
+@app.route('/edit/<int:id>')
+def edit(id):
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM employees WHERE id = %s", (id,))
+    employee = cursor.fetchone()
+    cursor.execute("SELECT * FROM employees")
+    employees = cursor.fetchall()
+    cursor.close()
+    conn.close()
+
+    class EmployeeObj:
+        def __init__(self, row):
+            self.id, self.name, self.department, self.salary = row
+
+    return render_template_string(TEMPLATE, employees=employees, edit_employee=EmployeeObj(employee))
+
+
+@app.route('/update/<int:id>', methods=['POST'])
+def update(id):
+    name = request.form['name']
+    department = request.form['department']
+    salary = request.form['salary']
+
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute("UPDATE employees SET name=%s, department=%s, salary=%s WHERE id=%s",
+                   (name, department, salary, id))
+    conn.commit()
+    cursor.close()
+    conn.close()
+    return redirect(url_for('index'))
+
+
+@app.route('/delete/<int:id>')
+def delete(id):
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM employees WHERE id = %s", (id,))
+    conn.commit()
+    cursor.close()
+    conn.close()
+    return redirect(url_for('index'))
+
+
+if __name__ == '__main__':
+    init_db()
+    app.run(debug=True, port=5001)
+
+
+====================================================================
+====================================================================
+                        END OF ALL PROGRAMS
+====================================================================
+====================================================================
