@@ -1,452 +1,858 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI & Linux Practicals</title>
-    <meta name="description" content="Download AI and Linux Practical files.">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-color: #0f172a;
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --card-bg: rgba(30, 41, 59, 0.7);
-            --card-border: rgba(255, 255, 255, 0.1);
-            --card-hover-border: rgba(255, 255, 255, 0.25);
-            --primary-accent: #3b82f6;
-            --secondary-accent: #8b5cf6;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ML Practicals — Index</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --surface2: #21262d;
+      --border: #30363d;
+      --accent: #58a6ff;
+      --accent2: #3fb950;
+      --accent3: #f78166;
+      --accent4: #d2a8ff;
+      --text: #e6edf3;
+      --text-muted: #8b949e;
+      --py-color: #3b82f6;
+      --doc-color: #a855f7;
+      --pill-py: rgba(59,130,246,0.15);
+      --pill-doc: rgba(168,85,247,0.15);
+    }
 
-        html, body {
-            overflow-x: hidden;
-            width: 100%;
-            position: relative;
-        }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
 
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            min-height: 100vh;
-        }
+    /* ── Header ── */
+    header {
+      background: linear-gradient(135deg, #0d1117 0%, #1a1f2e 50%, #0d1117 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 2.5rem 2rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      top: -60px; left: -60px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(88,166,255,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    header::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; right: -40px;
+      width: 350px; height: 350px;
+      background: radial-gradient(circle, rgba(63,185,80,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .header-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(88,166,255,0.1);
+      border: 1px solid rgba(88,166,255,0.3);
+      border-radius: 999px;
+      padding: 4px 14px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    h1 {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 700;
+      line-height: 1.2;
+      background: linear-gradient(135deg, #e6edf3 30%, #58a6ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+    .header-sub {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      font-weight: 400;
+    }
+    .stats-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+    .stat-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 8px 16px;
+      font-size: 0.82rem;
+      font-weight: 500;
+    }
+    .stat-chip .dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+    }
+    .dot-py { background: var(--py-color); box-shadow: 0 0 6px var(--py-color); }
+    .dot-doc { background: var(--doc-color); box-shadow: 0 0 6px var(--doc-color); }
 
-        /* Abstract background orbs */
-        .bg-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(100px);
-            z-index: -1;
-            animation: float 20s infinite ease-in-out alternate;
-        }
+    /* ── Main ── */
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
 
-        .orb-1 {
-            width: 400px;
-            height: 400px;
-            background: rgba(59, 130, 246, 0.15);
-            top: -100px;
-            left: -100px;
-        }
+    /* ── Search & Filter ── */
+    .toolbar {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 1.8rem;
+    }
+    .search-wrap {
+      flex: 1;
+      min-width: 220px;
+      position: relative;
+    }
+    .search-wrap svg {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+    #searchInput {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      padding: 10px 14px 10px 42px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    #searchInput:focus { border-color: var(--accent); }
+    #searchInput::placeholder { color: var(--text-muted); }
 
-        .orb-2 {
-            width: 500px;
-            height: 500px;
-            background: rgba(139, 92, 246, 0.15);
-            bottom: -100px;
-            right: -100px;
-            animation-delay: -10s;
-        }
+    .filter-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+    .filter-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-muted);
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      padding: 8px 16px;
+      transition: all 0.2s;
+    }
+    .filter-btn:hover { border-color: var(--accent); color: var(--text); }
+    .filter-btn.active-all  { background: rgba(88,166,255,0.15); border-color: var(--accent); color: var(--accent); }
+    .filter-btn.active-py   { background: var(--pill-py); border-color: var(--py-color); color: var(--py-color); }
+    .filter-btn.active-doc  { background: var(--pill-doc); border-color: var(--doc-color); color: var(--doc-color); }
 
-        @keyframes float {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
-        }
+    /* ── Section headers ── */
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-header h2 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .section-icon {
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-size: 0.85rem;
+    }
+    .icon-py  { background: var(--pill-py);  color: var(--py-color); }
+    .icon-doc { background: var(--pill-doc); color: var(--doc-color); }
+    .count-badge {
+      margin-left: auto;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 2px 10px;
+    }
 
-        main {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 4rem 2rem;
-        }
+    /* ── File grid ── */
+    .file-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 12px;
+      margin-bottom: 2.5rem;
+    }
 
-        header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
+    .file-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+      transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .file-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .file-card.py-card::before  { background: linear-gradient(135deg, rgba(59,130,246,0.05) 0%, transparent 60%); }
+    .file-card.doc-card::before { background: linear-gradient(135deg, rgba(168,85,247,0.05) 0%, transparent 60%); }
+    .file-card:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.3); }
+    .file-card.py-card:hover  { border-color: var(--py-color); }
+    .file-card.doc-card:hover { border-color: var(--doc-color); }
+    .file-card:hover::before { opacity: 1; }
 
-        h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: linear-gradient(to right, #60a5fa, #c084fc);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: -1px;
-        }
+    .file-icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .py-icon  { background: var(--pill-py);  color: var(--py-color); border: 1px solid rgba(59,130,246,0.3); }
+    .doc-icon { background: var(--pill-doc); color: var(--doc-color); border: 1px solid rgba(168,85,247,0.3); }
 
-        p {
-            color: var(--text-secondary);
-            font-size: 1.125rem;
-        }
+    .file-info { flex: 1; min-width: 0; }
+    .file-num {
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 2px;
+    }
+    .file-title {
+      font-size: 0.88rem;
+      font-weight: 500;
+      line-height: 1.4;
+      color: var(--text);
+      word-break: break-word;
+    }
+    .file-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 6px;
+    }
+    .file-ext {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.68rem;
+      font-weight: 500;
+      border-radius: 5px;
+      padding: 1px 7px;
+    }
+    .ext-py  { background: var(--pill-py);  color: var(--py-color); }
+    .ext-doc { background: var(--pill-doc); color: var(--doc-color); }
+    .file-size {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+    .arrow {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+      transition: transform 0.2s, color 0.2s;
+    }
+    .file-card:hover .arrow { transform: translateX(3px); color: var(--text); }
 
-        .search-container {
-            max-width: 600px;
-            margin: 0 auto 3rem auto;
-            position: relative;
-        }
+    /* ── No results ── */
+    .no-results {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      padding: 4rem 2rem;
+      color: var(--text-muted);
+      gap: 0.5rem;
+      text-align: center;
+    }
+    .no-results svg { opacity: 0.4; }
+    .no-results p { font-size: 0.9rem; }
 
-        .search-input {
-            width: 100%;
-            padding: 1rem 1.5rem 1rem 3rem;
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid var(--card-border);
-            border-radius: 999px;
-            color: var(--text-primary);
-            font-size: 1rem;
-            outline: none;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      padding: 1.2rem 2rem;
+      text-align: center;
+    }
 
-        .search-input:focus {
-            border-color: var(--primary-accent);
-            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 1.2rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-secondary);
-        }
-
-        .tabs {
-            display: flex;
-            justify-content: flex-start;
-            flex-wrap: wrap;
-            gap: 1rem;
-            margin-bottom: 3rem;
-            max-width: 100%;
-            overflow-x: auto;
-        }
-        
-        /* Desktop centering */
-        @media (min-width: 769px) {
-            .tabs {
-                justify-content: center;
-                overflow-x: visible;
-            }
-        }
-
-        .tab-btn {
-            background: rgba(30, 41, 59, 0.5);
-            border: 1px solid var(--card-border);
-            padding: 0.75rem 2rem;
-            border-radius: 999px;
-            color: var(--text-secondary);
-            font-size: 1rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .tab-btn:hover {
-            border-color: var(--card-hover-border);
-            color: var(--text-primary);
-        }
-
-        .tab-btn.active {
-            background: var(--primary-accent);
-            color: white;
-            border-color: var(--primary-accent);
-            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
-        }
-
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 1.25rem;
-            backdrop-filter: blur(12px);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: var(--card-hover-border);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            background: rgba(30, 41, 59, 0.9);
-        }
-
-        .card-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 0.875rem;
-            flex-shrink: 0;
-        }
-
-        .icon-py {
-            background: rgba(234, 179, 8, 0.1);
-            color: #facc15;
-            border: 1px solid rgba(234, 179, 8, 0.2);
-        }
-
-        .icon-pdf {
-            background: rgba(239, 68, 68, 0.1);
-            color: #f87171;
-            border: 1px solid rgba(239, 68, 68, 0.2);
-        }
-
-        .card-content {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .card-title {
-            font-size: 1rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 0.25rem;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .card-filename {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: block;
-        }
-
-        .download-btn {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--text-secondary);
-            transition: all 0.2s ease;
-            flex-shrink: 0;
-        }
-
-        .card:hover .download-btn {
-            background: var(--primary-accent);
-            color: white;
-            transform: scale(1.1);
-        }
-
-        .no-results {
-            text-align: center;
-            grid-column: 1 / -1;
-            color: var(--text-secondary);
-            padding: 3rem 0;
-            font-size: 1.125rem;
-        }
-
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            main { padding: 1.5rem 1rem; width: 100%; }
-            .grid { grid-template-columns: 1fr; }
-            .tabs { 
-                flex-direction: column; 
-                width: 100%; 
-            }
-            .tab-btn { 
-                width: 100%; 
-                text-align: center; 
-                padding: 0.75rem 1rem;
-            }
-            .search-input {
-                padding: 1rem 1rem 1rem 2.5rem;
-            }
-            .search-icon {
-                left: 0.8rem;
-            }
-        }
-    </style>
+    /* ── Hidden utility ── */
+    .hidden { display: none !important; }
+  </style>
 </head>
 <body>
-    <div class="bg-orb orb-1"></div>
-    <div class="bg-orb orb-2"></div>
 
-    <main>
+<header>
+  <div class="header-inner">
+    <div class="header-badge">📚 ML Practicals</div>
+    <h1>Practice File Index</h1>
+    <p class="header-sub">All Python scripts and Word documents — one place</p>
+    <div class="stats-row">
+      <div class="stat-chip"><span class="dot dot-py"></span> 27 Python Scripts</div>
+      <div class="stat-chip"><span class="dot dot-doc"></span> 13 Word Documents</div>
+    </div>
+  </div>
+</header>
 
-        <div class="search-container">
-            <svg class="search-icon" viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-            <input type="text" id="searchInput" class="search-input" placeholder="Search for practicals...">
-        </div>
+<main>
 
-        <div class="tabs">
-            <button class="tab-btn active" data-tab="ai">AI Practicals</button>
-            <button class="tab-btn" data-tab="linux">Linux Practicals</button>
-        </div>
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <div class="search-wrap">
+      <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input type="text" id="searchInput" placeholder="Search files…" oninput="filterFiles()"/>
+    </div>
+    <div class="filter-btns">
+      <button class="filter-btn active-all" onclick="setFilter('all',this)" id="btn-all">All Files</button>
+      <button class="filter-btn" onclick="setFilter('py',this)"  id="btn-py">🐍 Python</button>
+      <button class="filter-btn" onclick="setFilter('doc',this)" id="btn-doc">📄 Word Docs</button>
+    </div>
+  </div>
 
-        <section class="content-section">
-            <div id="ai" class="tab-content active">
-                <div class="grid" id="ai-grid"></div>
-            </div>
-            <div id="linux" class="tab-content">
-                <div class="grid" id="linux-grid"></div>
-            </div>
-        </section>
-    </main>
+  <!-- Python Files -->
+  <div class="section-header" id="sec-py">
+    <span class="section-icon icon-py">🐍</span>
+    <h2>Python Scripts</h2>
+    <span class="count-badge" id="py-count">27</span>
+  </div>
+  <div class="file-grid" id="grid-py">
 
-    <script>
-        const aiFiles = [
-            "8_puzzle_bfs.py",
-            "8_puzzle_bfs_input.py",
-            "8_puzzle_bfs_user_def.py",
-            "8_puzzle_dfs.py",
-            "8_puzzle_dfs_input.py",
-            "8_puzzle_dfs_optimized.py",
-            "8_puzzle_dfs_user_def.py",
-            "a_star.py",
-            "a_star_heuristic_input.py",
-            "a_star_input.py",
-            "family_relationships.py",
-            "forward_backward_chaining.py",
-            "goal_based_path.py",
-            "goal_based_step_counter.py",
-            "goal_based_user_input.py",
-            "goal_based_validation.py",
-            "hill_climbing_tsp.py",
-            "minimax_tic_tac_toe.py",
-            "unification_resolution.py",
-            "user_defined_graph.py",
-            "vacuum_agent_input.py",
-            "vacuum_agent_simple.py",
-            "vacuum_agent_three_rooms.py",
-            "vacuum_agent_two_rooms.py"
-        ];
+    <a class="file-card py-card" href="01_create_a_NumPy_array_of_all_1s_and_all_0s.py" data-name="create a NumPy array of all 1s and all 0s numpy">
+      <div class="file-icon py-icon">🐍</div>
+      <div class="file-info">
+        <div class="file-num">Prac 01</div>
+        <div class="file-title">Create a NumPy Array of all 1s and all 0s</div>
+        <div class="file-meta"><span class="file-ext ext-py">.py</span><span class="file-size">208 B</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
 
-        const linuxFiles = [
-            "Linux_All_Practicals_Merged.pdf"
-        ];
+    <a class="file-card py-card" href="02_create_a_NumPy_array_of_random_numbers_and_change_its_shape.py" data-name="NumPy array random numbers reshape">
+      <div class="file-icon py-icon">🐍</div>
+      <div class="file-info">
+        <div class="file-num">Prac 02</div>
+        <div class="file-title">NumPy Array of Random Numbers &amp; Reshape</div>
+        <div class="file-meta"><span class="file-ext ext-py">.py</span><span class="file-size">174 B</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
 
-        function formatName(filename) {
-            let name = filename.replace('.py', '').replace('.pdf', '');
-            return name.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-        }
+    <a class="file-card py-card" href="03_Identify_Missing_Values_in_a_DataFrame.py" data-name="identify missing values dataframe pandas isnull">
+      <div class="file-icon py-icon">🐍</div>
+      <div class="file-info">
+        <div class="file-num">Prac 03</div>
+        <div class="file-title">Identify Missing Values in a DataFrame</div>
+        <div class="file-meta"><span class="file-ext ext-py">.py</span><span class="file-size">166 B</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
 
-        function createCard(file, folder) {
-            const isPdf = file.endsWith('.pdf');
-            const iconClass = isPdf ? 'icon-pdf' : 'icon-py';
-            const iconText = isPdf ? 'PDF' : 'PY';
-            // URL encode folder names with spaces
-            const encodedFolder = encodeURIComponent(folder);
-            const encodedFile = encodeURIComponent(file);
-            
-            return `
-                <a href="${encodedFolder}/${encodedFile}" download="${file}" class="card" data-name="${file.toLowerCase()}">
-                    <div class="card-icon ${iconClass}">${iconText}</div>
-                    <div class="card-content">
-                        <h3 class="card-title">${formatName(file)}</h3>
-                        <span class="card-filename">${file}</span>
-                    </div>
-                    <div class="download-btn">
-                        <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                            <polyline points="7 10 12 15 17 10"></polyline>
-                            <line x1="12" y1="15" x2="12" y2="3"></line>
-                        </svg>
-                    </div>
-                </a>
-            `;
-        }
+    <a class="file-card py-card" href="04_Drop_Missing_Values_in_a_DataFrame.py" data-name="drop missing values dataframe dropna pandas">
+      <div class="file-icon py-icon">🐍</div>
+      <div class="file-info">
+        <div class="file-num">Prac 04</div>
+        <div class="file-title">Drop Missing Values in a DataFrame</div>
+        <div class="file-meta"><span class="file-ext ext-py">.py</span><span class="file-size">185 B</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
 
-        function renderGrid(files, folder, gridId) {
-            const grid = document.getElementById(gridId);
-            grid.innerHTML = files.map(file => createCard(file, folder)).join('');
-        }
+    <a class="file-card py-card" href="05_impute_missing_values_using_mean_values.py" data-name="impute missing values mean fillna">
+      <div class="file-icon py-icon">🐍</div>
+      <div class="file-info">
+        <div class="file-num">Prac 05</div>
+        <div class="file-title">Impute Missing Values using Mean</div>
+        <div class="file-meta"><span class="file-ext ext-py">.py</span><span class="file-size">214 B</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
 
-        // Initialize grids
-        renderGrid(aiFiles, 'AI PRAC', 'ai-grid');
-        renderGrid(linuxFiles, 'LINUX PRAC', 'linux-grid');
+    <a class="file-card py-card" href="06_impute_missing_values_using_median_values.py" data-name="impute missing values median fillna">
+      <div class="file-icon py-icon">🐍</div>
+      <div class="file-info">
+        <div class="file-num">Prac 06</div>
+        <div class="file-title">Impute Missing Values using Median</div>
+        <div class="file-meta"><span class="file-ext ext-py">.py</span><span class="file-size">220 B</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
 
-        // Tab Switching
-        const tabBtns = document.querySelectorAll('.tab-btn');
-        const tabContents = document.querySelectorAll('.tab-content');
+    <a class="file-card py-card" href="07_impute_categorical_columns.py" data-name="impute categorical columns mode fillna">
+      <div class="file-icon py-icon">🐍</div>
+      <div class="file-info">
+        <div class="file-num">Prac 07</div>
+        <div class="file-title">Impute Categorical Columns (Mode)</div>
+        <div class="file-meta"><span class="file-ext ext-py">.py</span><span class="file-size">229 B</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
 
-        tabBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                // Remove active class from all
-                tabBtns.forEach(b => b.classList.remove('active'));
-                tabContents.forEach(c => c.classList.remove('active'));
-                
-                // Add active class to clicked
-                btn.classList.add('active');
-                document.getElementById(btn.dataset.tab).classList.add('active');
-            });
-        });
+    <a class="file-card py-card" href="08_impute_missing_values_using_SimpleImputer.py" data-name="impute missing values SimpleImputer sklearn">
+      <div class="file-icon py-icon">🐍</div>
+      <div class="file-info">
+        <div class="file-num">Prac 08</div>
+        <div class="file-title">Impute Missing Values using SimpleImputer</div>
+        <div class="file-meta"><span class="file-ext ext-py">.py</span><span class="file-size">271 B</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
 
-        // Search Functionality
-        const searchInput = document.getElementById('searchInput');
-        
-        searchInput.addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase();
-            const activeTab = document.querySelector('.tab-content.active');
-            const cards = activeTab.querySelectorAll('.card');
-            let hasResults = false;
+    <a class="file-card py-card" href="09_impute_missing_values_using_KNNImputer.py" data-name="impute missing values KNNImputer sklearn knn">
+      <div class="file-icon py-icon">🐍</div>
+      <div class="file-info">
+        <div class="file-num">Prac 09</div>
+        <div class="file-title">Impute Missing Values using KNNImputer</div>
+        <div class="file-meta"><span class="file-ext ext-py">.py</span><span class="file-size">281 B</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
 
-            cards.forEach(card => {
-                if (card.dataset.name.includes(query)) {
-                    card.style.display = 'flex';
-                    hasResults = true;
-                } else {
-                    card.style.display = 'none';
-                }
-            });
+    <a class="file-card py-card" href="10_encoding_target_labels_using_LabelEncoder.py" data-name="encoding target labels LabelEncoder sklearn">
+      <div class="file-icon py-icon">🐍</div>
+      <div class="file-info">
+        <div class="file-num">Prac 10</div>
+        <div class="file-title">Encoding Target Labels using LabelEncoder</div>
+        <div class="file-meta"><span class="file-ext ext-py">.py</span><span class="file-size">178 B</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
 
-            // Handle no results
-            let noResultsMsg = activeTab.querySelector('.no-results');
-            if (!hasResults && !noResultsMsg) {
-                activeTab.querySelector('.grid').insertAdjacentHTML('afterend', '<div class="no-results">No practicals found matching your search.</div>');
-            } else if (hasResults && noResultsMsg) {
-                noResultsMsg.remove();
-            }
-        });
-    </script>
+    <a class="file-card py-card" href="11_encoding_categorical_columns_using_One-Hot_Encoding.py" data-name="encoding categorical one hot get_dummies pandas">
+      <div class="file-icon py-icon">🐍</div>
+      <div class="file-info">
+        <div class="file-num">Prac 11</div>
+        <div class="file-title">One-Hot Encoding for Categorical Columns</div>
+        <div class="file-meta"><span class="file-ext ext-py">.py</span><span class="file-size">178 B</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="file-card py-card" href="12_encoding_ordinal_column_using_Ordinal_Encoding.py" data-name="encoding ordinal OrdinalEncoder sklearn">
+      <div class="file-icon py-icon">🐍</div>
+      <div class="file-info">
+        <div class="file-num">Prac 12</div>
+        <div class="file-title">Ordinal Encoding for Ordinal Columns</div>
+        <div class="file-meta"><span class="file-ext ext-py">.py</span><span class="file-size">296 B</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="file-card py-card" href="13_applying_Normalization_using_MinMaxScaler.py" data-name="normalization MinMaxScaler sklearn feature scaling">
+      <div class="file-icon py-icon">🐍</div>
+      <div class="file-info">
+        <div class="file-num">Prac 13</div>
+        <div class="file-title">Normalization using MinMaxScaler</div>
+        <div class="file-meta"><span class="file-ext ext-py">.py</span><span class="file-size">240 B</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="file-card py-card" href="14_applying_Standardization_using_StandardScaler.py" data-name="standardization StandardScaler sklearn feature scaling">
+      <div class="file-icon py-icon">🐍</div>
+      <div class="file-info">
+        <div class="file-num">Prac 14</div>
+        <div class="file-title">Standardization using StandardScaler</div>
+        <div class="file-meta"><span class="file-ext ext-py">.py</span><span class="file-size">246 B</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="file-card py-card" href="15_implement_a_regression_model_using_Simple_Linear_Regression.py" data-name="linear regression sklearn salary prediction">
+      <div class="file-icon py-icon">🐍</div>
+      <div class="file-info">
+        <div class="file-num">Prac 15</div>
+        <div class="file-title">Simple Linear Regression</div>
+        <div class="file-meta"><span class="file-ext ext-py">.py</span><span class="file-size">1.2 KB</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="file-card py-card" href="16_implement_a_binary_classification_model_using_Logistic_Regression.py" data-name="logistic regression binary classification sklearn">
+      <div class="file-icon py-icon">🐍</div>
+      <div class="file-info">
+        <div class="file-num">Prac 16</div>
+        <div class="file-title">Binary Classification — Logistic Regression</div>
+        <div class="file-meta"><span class="file-ext ext-py">.py</span><span class="file-size">996 B</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="file-card py-card" href="17_implement_a_classification_model_using_Decision_Tree.py" data-name="decision tree classification sklearn play tennis">
+      <div class="file-icon py-icon">🐍</div>
+      <div class="file-info">
+        <div class="file-num">Prac 17</div>
+        <div class="file-title">Classification using Decision Tree</div>
+        <div class="file-meta"><span class="file-ext ext-py">.py</span><span class="file-size">663 B</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="file-card py-card" href="18_implement_a_classification_model_using_Random_Forest.py" data-name="random forest classification sklearn ensemble">
+      <div class="file-icon py-icon">🐍</div>
+      <div class="file-info">
+        <div class="file-num">Prac 18</div>
+        <div class="file-title">Classification using Random Forest</div>
+        <div class="file-meta"><span class="file-ext ext-py">.py</span><span class="file-size">686 B</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="file-card py-card" href="19_implement_a_classification_model_using_Linear_SVM.py" data-name="SVM linear classification SVC sklearn">
+      <div class="file-icon py-icon">🐍</div>
+      <div class="file-info">
+        <div class="file-num">Prac 19</div>
+        <div class="file-title">Classification using Linear SVM</div>
+        <div class="file-meta"><span class="file-ext ext-py">.py</span><span class="file-size">791 B</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="file-card py-card" href="20_implement_a_classification_model_using_Non-Linear_SVM_using_RBF_kernel.py" data-name="SVM non-linear RBF kernel classification sklearn">
+      <div class="file-icon py-icon">🐍</div>
+      <div class="file-info">
+        <div class="file-num">Prac 20</div>
+        <div class="file-title">Non-Linear SVM with RBF Kernel</div>
+        <div class="file-meta"><span class="file-ext ext-py">.py</span><span class="file-size">652 B</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="file-card py-card" href="21_implement_multiclass_classification_using_SVM_(One-vs-One_Strategy).py" data-name="SVM multiclass one vs one OvO classification wine">
+      <div class="file-icon py-icon">🐍</div>
+      <div class="file-info">
+        <div class="file-num">Prac 21</div>
+        <div class="file-title">Multiclass SVM — One-vs-One Strategy</div>
+        <div class="file-meta"><span class="file-ext ext-py">.py</span><span class="file-size">754 B</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="file-card py-card" href="22_implement_K-Means_clustering_algorithm.py" data-name="K-Means clustering algorithm KMeans sklearn iris">
+      <div class="file-icon py-icon">🐍</div>
+      <div class="file-info">
+        <div class="file-num">Prac 22</div>
+        <div class="file-title">K-Means Clustering Algorithm</div>
+        <div class="file-meta"><span class="file-ext ext-py">.py</span><span class="file-size">531 B</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="file-card py-card" href="23_implement_Agglomerative_Hierarchical_Clustering.py" data-name="agglomerative hierarchical clustering sklearn ward">
+      <div class="file-icon py-icon">🐍</div>
+      <div class="file-info">
+        <div class="file-num">Prac 23</div>
+        <div class="file-title">Agglomerative Hierarchical Clustering</div>
+        <div class="file-meta"><span class="file-ext ext-py">.py</span><span class="file-size">546 B</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="file-card py-card" href="24_implement_DBSCAN_clustering.py" data-name="DBSCAN clustering density based sklearn make_moons">
+      <div class="file-icon py-icon">🐍</div>
+      <div class="file-info">
+        <div class="file-num">Prac 24</div>
+        <div class="file-title">DBSCAN Clustering</div>
+        <div class="file-meta"><span class="file-ext ext-py">.py</span><span class="file-size">388 B</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="file-card py-card" href="25_train_a_model_and_saveload_using_Pickle.py" data-name="save load model pickle pkl serialization">
+      <div class="file-icon py-icon">🐍</div>
+      <div class="file-info">
+        <div class="file-num">Prac 25</div>
+        <div class="file-title">Save &amp; Load Model using Pickle</div>
+        <div class="file-meta"><span class="file-ext ext-py">.py</span><span class="file-size">737 B</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="file-card py-card" href="26_train_a_model_and_saveload_using_Joblib.py" data-name="save load model joblib serialization">
+      <div class="file-icon py-icon">🐍</div>
+      <div class="file-info">
+        <div class="file-num">Prac 26</div>
+        <div class="file-title">Save &amp; Load Model using Joblib</div>
+        <div class="file-meta"><span class="file-ext ext-py">.py</span><span class="file-size">691 B</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="file-card py-card" href="27_implement_dimensionality_reduction_using_PCA.py" data-name="PCA dimensionality reduction principal component analysis sklearn digits">
+      <div class="file-icon py-icon">🐍</div>
+      <div class="file-info">
+        <div class="file-num">Prac 27</div>
+        <div class="file-title">Dimensionality Reduction using PCA</div>
+        <div class="file-meta"><span class="file-ext ext-py">.py</span><span class="file-size">660 B</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+  </div>
+
+  <!-- Word Documents -->
+  <div class="section-header" id="sec-doc">
+    <span class="section-icon icon-doc">📄</span>
+    <h2>Word Documents</h2>
+    <span class="count-badge" id="doc-count">13</span>
+  </div>
+  <div class="file-grid" id="grid-doc">
+
+    <a class="file-card doc-card" href="Prac DOC/199_Shriyash_1_Python Fundamentals and NumPy Arrays.docx" data-name="python fundamentals numpy arrays prac 1 shriyash">
+      <div class="file-icon doc-icon">📄</div>
+      <div class="file-info">
+        <div class="file-num">Doc — Prac 1</div>
+        <div class="file-title">Python Fundamentals and NumPy Arrays</div>
+        <div class="file-meta"><span class="file-ext ext-doc">.docx</span><span class="file-size">256 KB</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="file-card doc-card" href="Prac DOC/199_Shriyash_2_Data Manipulation and Analysis using Pandas.docx" data-name="data manipulation analysis pandas prac 2 shriyash">
+      <div class="file-icon doc-icon">📄</div>
+      <div class="file-info">
+        <div class="file-num">Doc — Prac 2</div>
+        <div class="file-title">Data Manipulation &amp; Analysis using Pandas</div>
+        <div class="file-meta"><span class="file-ext ext-doc">.docx</span><span class="file-size">825 KB</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="file-card doc-card" href="Prac DOC/199_Shriyash_3_Handling Missing Values in a Dataset.docx" data-name="handling missing values dataset prac 3 shriyash">
+      <div class="file-icon doc-icon">📄</div>
+      <div class="file-info">
+        <div class="file-num">Doc — Prac 3</div>
+        <div class="file-title">Handling Missing Values in a Dataset</div>
+        <div class="file-meta"><span class="file-ext ext-doc">.docx</span><span class="file-size">826 KB</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="file-card doc-card" href="Prac DOC/199_Shriyash_4_Feature Encoding Techniques for Machine Learning.docx" data-name="feature encoding techniques machine learning prac 4 shriyash">
+      <div class="file-icon doc-icon">📄</div>
+      <div class="file-info">
+        <div class="file-num">Doc — Prac 4</div>
+        <div class="file-title">Feature Encoding Techniques for ML</div>
+        <div class="file-meta"><span class="file-ext ext-doc">.docx</span><span class="file-size">739 KB</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="file-card doc-card" href="Prac DOC/199_Shriyash_5_Feature Scaling Techniques in Machine Learning.docx" data-name="feature scaling techniques machine learning prac 5 shriyash">
+      <div class="file-icon doc-icon">📄</div>
+      <div class="file-info">
+        <div class="file-num">Doc — Prac 5</div>
+        <div class="file-title">Feature Scaling Techniques in ML</div>
+        <div class="file-meta"><span class="file-ext ext-doc">.docx</span><span class="file-size">114 KB</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="file-card doc-card" href="Prac DOC/Practical 6.docx" data-name="practical 6 doc">
+      <div class="file-icon doc-icon">📄</div>
+      <div class="file-info">
+        <div class="file-num">Doc — Prac 6</div>
+        <div class="file-title">Practical 6</div>
+        <div class="file-meta"><span class="file-ext ext-doc">.docx</span><span class="file-size">106 KB</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="file-card doc-card" href="Prac DOC/Practical 7.docx" data-name="practical 7 doc">
+      <div class="file-icon doc-icon">📄</div>
+      <div class="file-info">
+        <div class="file-num">Doc — Prac 7</div>
+        <div class="file-title">Practical 7</div>
+        <div class="file-meta"><span class="file-ext ext-doc">.docx</span><span class="file-size">663 KB</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="file-card doc-card" href="Prac DOC/Practical 8.docx" data-name="practical 8 doc">
+      <div class="file-icon doc-icon">📄</div>
+      <div class="file-info">
+        <div class="file-num">Doc — Prac 8</div>
+        <div class="file-title">Practical 8</div>
+        <div class="file-meta"><span class="file-ext ext-doc">.docx</span><span class="file-size">2.2 MB</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="file-card doc-card" href="Prac DOC/Practical 9.docx" data-name="practical 9 doc">
+      <div class="file-icon doc-icon">📄</div>
+      <div class="file-info">
+        <div class="file-num">Doc — Prac 9</div>
+        <div class="file-title">Practical 9</div>
+        <div class="file-meta"><span class="file-ext ext-doc">.docx</span><span class="file-size">702 KB</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="file-card doc-card" href="Prac DOC/Practical 10.docx" data-name="practical 10 doc">
+      <div class="file-icon doc-icon">📄</div>
+      <div class="file-info">
+        <div class="file-num">Doc — Prac 10</div>
+        <div class="file-title">Practical 10</div>
+        <div class="file-meta"><span class="file-ext ext-doc">.docx</span><span class="file-size">1.0 MB</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="file-card doc-card" href="Prac DOC/Practical 11.docx" data-name="practical 11 doc">
+      <div class="file-icon doc-icon">📄</div>
+      <div class="file-info">
+        <div class="file-num">Doc — Prac 11</div>
+        <div class="file-title">Practical 11</div>
+        <div class="file-meta"><span class="file-ext ext-doc">.docx</span><span class="file-size">828 KB</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="file-card doc-card" href="Prac DOC/Practical 12.docx" data-name="practical 12 doc">
+      <div class="file-icon doc-icon">📄</div>
+      <div class="file-info">
+        <div class="file-num">Doc — Prac 12</div>
+        <div class="file-title">Practical 12</div>
+        <div class="file-meta"><span class="file-ext ext-doc">.docx</span><span class="file-size">161 KB</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+    <a class="file-card doc-card" href="Prac DOC/Practical 13.docx" data-name="practical 13 doc">
+      <div class="file-icon doc-icon">📄</div>
+      <div class="file-info">
+        <div class="file-num">Doc — Prac 13</div>
+        <div class="file-title">Practical 13</div>
+        <div class="file-meta"><span class="file-ext ext-doc">.docx</span><span class="file-size">80 KB</span></div>
+      </div>
+      <span class="arrow">›</span>
+    </a>
+
+  </div>
+
+  <!-- No results -->
+  <div class="no-results" id="noResults">
+    <svg width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+      <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      <path d="M8 11h6M11 8v6" stroke-linecap="round"/>
+    </svg>
+    <p>No files match your search.</p>
+  </div>
+
+</main>
+
+<footer>
+  ML Practicals Index &nbsp;·&nbsp; 27 Python Scripts &nbsp;·&nbsp; 13 Word Documents
+</footer>
+
+<script>
+  let activeFilter = 'all';
+
+  function setFilter(type, btn) {
+    activeFilter = type;
+    document.querySelectorAll('.filter-btn').forEach(b => {
+      b.className = 'filter-btn';
+    });
+    if (type === 'all') btn.classList.add('active-all');
+    else if (type === 'py') btn.classList.add('active-py');
+    else btn.classList.add('active-doc');
+    filterFiles();
+  }
+
+  function filterFiles() {
+    const q = document.getElementById('searchInput').value.toLowerCase().trim();
+
+    const pySection  = document.getElementById('sec-py');
+    const docSection = document.getElementById('sec-doc');
+    const pyGrid     = document.getElementById('grid-py');
+    const docGrid    = document.getElementById('grid-doc');
+
+    // Show/hide whole sections based on filter
+    const showPy  = activeFilter === 'all' || activeFilter === 'py';
+    const showDoc = activeFilter === 'all' || activeFilter === 'doc';
+
+    let visiblePy = 0, visibleDoc = 0;
+
+    document.querySelectorAll('.py-card').forEach(card => {
+      const match = card.dataset.name.toLowerCase().includes(q) ||
+                    card.querySelector('.file-title').textContent.toLowerCase().includes(q) ||
+                    card.querySelector('.file-num').textContent.toLowerCase().includes(q);
+      const visible = showPy && match;
+      card.classList.toggle('hidden', !visible);
+      if (visible) visiblePy++;
+    });
+
+    document.querySelectorAll('.doc-card').forEach(card => {
+      const match = card.dataset.name.toLowerCase().includes(q) ||
+                    card.querySelector('.file-title').textContent.toLowerCase().includes(q) ||
+                    card.querySelector('.file-num').textContent.toLowerCase().includes(q);
+      const visible = showDoc && match;
+      card.classList.toggle('hidden', !visible);
+      if (visible) visibleDoc++;
+    });
+
+    // Section visibility
+    pySection.classList.toggle('hidden', !showPy || visiblePy === 0);
+    pyGrid.classList.toggle('hidden',    !showPy || visiblePy === 0);
+    docSection.classList.toggle('hidden', !showDoc || visibleDoc === 0);
+    docGrid.classList.toggle('hidden',    !showDoc || visibleDoc === 0);
+
+    document.getElementById('py-count').textContent = visiblePy;
+    document.getElementById('doc-count').textContent = visibleDoc;
+
+    document.getElementById('noResults').style.display =
+      (visiblePy + visibleDoc === 0) ? 'flex' : 'none';
+  }
+</script>
 </body>
 </html>
